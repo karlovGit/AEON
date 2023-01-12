@@ -10,6 +10,29 @@ namespace aeon.Integration1C.Server
   {
 
     /// <summary>
+    /// Получить организации из 1С.
+    /// </summary>
+    public virtual void GetCompanyIn1C()
+    {
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
+      var queueName = setting.QueueGetForCounterparties;
+      var routingKeyVerification = setting.RoutingKeySendVerification;
+      var routingKeyError = setting.RoutingKeyErrors;
+      
+      var messages = Functions.Module.GetMessagesFromRabbitMQ(queueName);
+      foreach (var message in messages)
+      {
+        Logger.Debug(aeon.Integration1C.Resources.LoggingMessageFromRabbitMQFormat(message));
+        
+        var async = AsyncHandlers.UpdateCompany.Create();
+        async.Message = message;
+        async.RoutingKeyVerification = routingKeyVerification;
+        async.RoutingKeyError = routingKeyError;
+        async.ExecuteAsync();
+      }
+    }
+
+    /// <summary>
     /// Отправить Договорные документы в 1С.
     /// </summary>
     public virtual void SendContractualDocsIn1C()
@@ -28,15 +51,31 @@ namespace aeon.Integration1C.Server
     }
 
     /// <summary>
-    /// Получить данные из 1С.
+    /// Получить договорные документы из 1С.
     /// </summary>
-    public virtual void GetDataIn1C()
+    public virtual void GetContractualDocsIn1C()
     {
-      var asyncCompany = AsyncHandlers.GetCompanyIn1CAsync.Create();
-      asyncCompany.ExecuteAsync();
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
       
-      var asyncContract = AsyncHandlers.GetContractualDocIn1CAsync.Create();
-      asyncContract.ExecuteAsync();
+      var queueName = setting.QueueGetForContracts;
+      var errorQueue = setting.QueueErrors;
+      var routingKeyVerification = setting.RoutingKeySendVerification;
+      var routingKeyError = setting.RoutingKeyErrors;
+      
+      var messages = Functions.Module.GetMessagesFromRabbitMQ(queueName);
+      var contractualDocs = AEOHSolution.ContractualDocuments.GetAll();
+      foreach (var message in messages)
+      {
+        Logger.Debug(aeon.Integration1C.Resources.LoggingMessageFromRabbitMQFormat(message));
+        
+        var async = AsyncHandlers.UpdateContractualDoc.Create();
+        async.Message = message;
+        async.RoutingKeyVerification = routingKeyVerification;
+        async.RoutingKeyError = routingKeyError;
+        async.IdContractualDocResponsible = setting.ContractResponsible.Id;
+        
+        async.ExecuteAsync();
+      }
     }
 
     /// <summary>

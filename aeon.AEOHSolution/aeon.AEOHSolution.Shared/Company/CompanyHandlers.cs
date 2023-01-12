@@ -10,6 +10,20 @@ namespace aeon.AEOHSolution
   partial class CompanySharedHandlers
   {
 
+    public virtual void RegNumberChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
+    {
+      if (e.NewValue != e.OldValue && !string.IsNullOrEmpty(e.NewValue))
+        _obj.IsForOffice = false;
+    }
+
+    public override void NonresidentChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
+    {
+      base.NonresidentChanged(e);
+      
+      if (e.NewValue.HasValue && e.NewValue != e.OldValue)
+        Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), e.NewValue.Value);
+    }
+
     public override void TRRCChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
     {
       base.TRRCChanged(e);
@@ -29,7 +43,7 @@ namespace aeon.AEOHSolution
     public virtual void IsForOfficeChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
     {
       if (e.NewValue.HasValue && e.NewValue != e.OldValue)
-        Functions.Company.IsRequiredTINAndTRRC(_obj, e.NewValue.Value);
+        Functions.Company.IsRequiredTINAndTRRC(_obj, e.NewValue.Value, _obj.Nonresident.GetValueOrDefault());
     }
 
   }

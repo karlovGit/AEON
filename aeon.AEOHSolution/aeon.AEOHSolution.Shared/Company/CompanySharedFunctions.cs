@@ -25,13 +25,12 @@ namespace aeon.AEOHSolution.Shared
     /// Доступность полей ИНН и КПП.
     /// </summary>
     /// <param name="isForOffice">Для канцелярии.</param>
-    public void IsRequiredTINAndTRRC(bool isForOffice)
+    /// <param name="nonresident">Нерезидент.</param>
+    public void IsRequiredTINAndTRRC(bool isForOffice, bool nonresident)
     {
-      if (!isForOffice)
-        return;
-      
-      _obj.State.Properties.TIN.IsRequired = false;
-      _obj.State.Properties.TRRC.IsRequired = false;
+      _obj.State.Properties.TIN.IsRequired = !isForOffice && !nonresident;
+      _obj.State.Properties.TRRC.IsRequired = !isForOffice && !nonresident;
+      _obj.State.Properties.RegNumber.IsRequired = nonresident && !isForOffice;
     }
 
   }

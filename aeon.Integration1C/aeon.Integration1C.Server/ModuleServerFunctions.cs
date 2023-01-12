@@ -132,9 +132,11 @@ namespace aeon.Integration1C.Server
     /// <param name="id">ИД сущности.</param>
     /// <param name="guid">Guid сущности.</param>
     /// <param name="correlation_id">ИД события.</param>
-    /// <param name="queueName">Имя очереди.</param>
-    public static string SerializeMessageFromResult(int id, string guid, string correlation_id, string queueName)
+    public static string SerializeMessageFromResult(int id, string guid, string correlation_id)
     {
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
+      var queueName = setting.QueueSendForVerification;
+      
       var message = string.Empty;
       
       var json = Structures.Module.ResultMesageFromRabbitMQ.Create();
@@ -158,9 +160,11 @@ namespace aeon.Integration1C.Server
     /// </summary>
     /// <param name="error">Ошибка.</param>
     /// <param name="correlation_id">ИД события.</param>
-    /// <param name="queueName">Имя очереди.</param>
-    public static string SerializeMessageFromError(string error, string correlation_id, string queueName)
+    public static string SerializeMessageFromError(string error, string correlation_id)
     {
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
+      var queueName = setting.QueueErrors;
+      
       var message = string.Empty;
       
       var json = Structures.Module.ErrorMesageFromRabbitMQ.Create();
@@ -357,8 +361,15 @@ namespace aeon.Integration1C.Server
     /// <param name="json">Json.</param>
     /// <param name="exchange">Точка доступа.</param>
     /// <param name="routingKey">Ключ очереди.</param>
-    public void SendMessageFromRabbitMQ(string hostName, string virtualHost, string userName, string password, string json, string exchange, string routingKey)
+    public void SendMessageFromRabbitMQ(string json, string routingKey)
     {
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
+      var exchange = setting.ExchangePoint;
+      var hostName = setting.ServerName;
+      var virtualHost = setting.VirtualHost;
+      var userName = setting.UserName;
+      var password = setting.Password;
+      
       var result = new List<string>();
       var factory = new ConnectionFactory()
       {

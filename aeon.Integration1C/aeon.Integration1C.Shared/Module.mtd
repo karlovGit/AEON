@@ -4,14 +4,6 @@
   "Name": "Integration1C",
   "AsyncHandlers": [
     {
-      "NameGuid": "fde27690-e139-45fd-b6f9-07b5e2b7e469",
-      "Name": "GetCompanyIn1CAsync",
-      "DelayPeriod": 15,
-      "DelayStrategy": "RegularDelayStrategy",
-      "IsHandlerGenerated": true,
-      "Parameters": []
-    },
-    {
       "NameGuid": "d7ebfb45-8708-43c9-b077-4e5bcaf7c628",
       "Name": "SendCompanyIn1CAsync",
       "DelayPeriod": 15,
@@ -28,20 +20,65 @@
       "Parameters": []
     },
     {
-      "NameGuid": "a5b55cbe-f0de-49f7-a1c8-a27f0b0518c1",
-      "Name": "GetContractualDocIn1CAsync",
-      "DelayPeriod": 15,
-      "DelayStrategy": "RegularDelayStrategy",
-      "IsHandlerGenerated": true,
-      "Parameters": []
-    },
-    {
       "NameGuid": "f27a4a8f-9b1a-453b-984f-05f793ebdab7",
       "Name": "SendContractualDocsIn1CAsync",
       "DelayPeriod": 15,
       "DelayStrategy": "RegularDelayStrategy",
       "IsHandlerGenerated": true,
       "Parameters": []
+    },
+    {
+      "NameGuid": "688ad37e-57a2-46f0-9d50-081fbd6286ab",
+      "Name": "UpdateContractualDoc",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "09903d2f-c075-46a2-a77a-4c62c450407b",
+          "Name": "Message",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "2ac913cd-a08e-4bb0-ac6c-ea694e7b738f",
+          "Name": "RoutingKeyError",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "838bd86a-f26f-4891-b4d7-d6b5817445f4",
+          "Name": "IdContractualDocResponsible",
+          "ParameterType": "Integer"
+        },
+        {
+          "NameGuid": "f3e2b117-6727-4511-86c5-738d478db486",
+          "Name": "RoutingKeyVerification",
+          "ParameterType": "String"
+        }
+      ]
+    },
+    {
+      "NameGuid": "650514c0-c1ff-47ed-9e6a-851e4f290ff4",
+      "Name": "UpdateCompany",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "4aa65aeb-6b02-489e-8b2a-39092d684062",
+          "Name": "Message",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "68101f5d-c619-4341-b0c3-1db034748436",
+          "Name": "RoutingKeyError",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "e313e92a-5b71-437b-943e-bd423c023c1c",
+          "Name": "RoutingKeyVerification",
+          "ParameterType": "String"
+        }
+      ]
     }
   ],
   "ClientAssemblyName": "aeon.Integration1C.Client",
@@ -113,7 +150,7 @@
     },
     {
       "NameGuid": "c18285a9-b2fe-4fe1-b80a-72928eb81e23",
-      "Name": "GetDataIn1C",
+      "Name": "GetContractualDocsIn1C",
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
@@ -128,6 +165,13 @@
     {
       "NameGuid": "477dab9e-404b-4c75-a648-de39cc217b93",
       "Name": "SendContractualDocsIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "eb6c3016-3911-46d9-b70a-0a53a2c40409",
+      "Name": "GetCompanyIn1C",
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
@@ -174,7 +218,7 @@
   "SharedAssemblyName": "aeon.Integration1C.Shared",
   "SharedNamespace": "aeon.Integration1C.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.17",
+  "Version": "0.0.1.20",
   "Widgets": [],
   "Versions": [
     {

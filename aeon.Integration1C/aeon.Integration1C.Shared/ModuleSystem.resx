@@ -142,13 +142,10 @@
     <value>Sending new companies to 1C: UH.</value>
   </data>
   <data name="JobDisplayName_c18285a9b2fe4fe1b80a72928eb81e23" xml:space="preserve">
-    <value>Integration. Getting data in 1C</value>
+    <value>Integration. Getting Contractual documents in 1C</value>
   </data>
   <data name="JobDescription_c18285a9b2fe4fe1b80a72928eb81e23" xml:space="preserve">
-    <value>Getting new or changed data to 1C: UH.</value>
-  </data>
-  <data name="AsyncHandler_Description_fde27690e13945fdb6f907b5e2b7e469" xml:space="preserve">
-    <value>Getting new or changed companies to 1C: UH.</value>
+    <value>Getting new or changed Contractual documents to 1C: UH.</value>
   </data>
   <data name="AsyncHandler_Description_d7ebfb45870843c9b0774e5bcaf7c628" xml:space="preserve">
     <value>Sending new companies to 1C: UH.</value>
@@ -162,9 +159,6 @@
   <data name="JobDescription_5d775a4b05be4f72ba46ccf73f3dc2a8" xml:space="preserve">
     <value>Getting integration results to 1C: UH.</value>
   </data>
-  <data name="AsyncHandler_Description_a5b55cbef0de49f7a1c8a27f0b0518c1" xml:space="preserve">
-    <value>Getting new or changed contractual documents to 1C: UH.</value>
-  </data>
   <data name="JobDisplayName_477dab9e404b4c75a648de39cc217b93" xml:space="preserve">
     <value>Integration. Sending Contractual documents in 1C</value>
   </data>
@@ -173,5 +167,17 @@
   </data>
   <data name="AsyncHandler_Description_f27a4a8f9b1a453b984f05f793ebdab7" xml:space="preserve">
     <value>Sending new/changes contractual documents to 1C: UH.</value>
+  </data>
+  <data name="AsyncHandler_Description_688ad37e57a246f09d50081fbd6286ab" xml:space="preserve">
+    <value>Update Contractual Document</value>
+  </data>
+  <data name="AsyncHandler_Description_650514c0c1ff47ed9e6a851e4f290ff4" xml:space="preserve">
+    <value>Update Company</value>
+  </data>
+  <data name="JobDisplayName_eb6c3016391146d9b70a0a53a2c40409" xml:space="preserve">
+    <value>Integration. Getting Companies in 1C</value>
+  </data>
+  <data name="JobDescription_eb6c3016391146d9b70a0a53a2c40409" xml:space="preserve">
+    <value>Getting new or changed companies to 1C: UH.</value>
   </data>
 </root>
