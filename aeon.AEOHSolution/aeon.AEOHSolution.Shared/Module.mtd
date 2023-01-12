@@ -1,0 +1,86 @@
+{
+  "$type": "Sungero.Metadata.SolutionMetadata, Sungero.Metadata",
+  "NameGuid": "03c84aac-426c-4aa4-b41d-37c2286a7f39",
+  "Name": "AEOHSolution",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "aeon.AEOHSolution.Client",
+  "ClientBaseAssemblyName": "aeon.AEOHSolution.ClientBase",
+  "ClientBaseNamespace": "aeon.AEOHSolution.ClientBase",
+  "ClientNamespace": "aeon.AEOHSolution.Client",
+  "Code": "AEOHSol",
+  "CompanyCode": "aeon",
+  "Cover": {
+    "NameGuid": "a354b4d1-5d6e-4477-980f-b34e1135ebd2",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "117f7900-20ba-407c-9c99-fd8329d12235",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "55a2b6e0-1f2f-4b74-a8b8-4c2121a99173",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "DesktopViews": [],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "5c69693d-6efe-4ad4-b2f4-3dac4cd72fbc"
+    },
+    {
+      "ItemId": "a2b8c5f0-3cad-4b6a-9c39-eaf22bed245d",
+      "PreviousItemId": "5c69693d-6efe-4ad4-b2f4-3dac4cd72fbc"
+    },
+    {
+      "ItemId": "ed04e681-e6a7-48bf-9ae2-1ab39f182374",
+      "PreviousItemId": "a2b8c5f0-3cad-4b6a-9c39-eaf22bed245d"
+    },
+    {
+      "ItemId": "40fe5091-5593-4134-9bb7-b81829e89aa7",
+      "PreviousItemId": "ed04e681-e6a7-48bf-9ae2-1ab39f182374"
+    },
+    {
+      "ItemId": "c105d7ef-bee6-474a-a14c-f9753d0d6f27",
+      "PreviousItemId": "40fe5091-5593-4134-9bb7-b81829e89aa7"
+    },
+    {
+      "ItemId": "09c57fd4-2655-41f9-8771-484ed4f6f715",
+      "PreviousItemId": "c105d7ef-bee6-474a-a14c-f9753d0d6f27"
+    },
+    {
+      "ItemId": "3fda1c44-7868-46c2-831b-7037d0c227a0",
+      "PreviousItemId": "09c57fd4-2655-41f9-8771-484ed4f6f715"
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "aeon.AEOHSolution",
+  "OrderedSpecialFolders": [],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "aeon.AEOHSolution",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "aeon.AEOHSolution.Server",
+  "ServerNamespace": "aeon.AEOHSolution.Server",
+  "SharedAssemblyName": "aeon.AEOHSolution.Shared",
+  "SharedNamespace": "aeon.AEOHSolution.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.21",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "SolutionMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

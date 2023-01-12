@@ -1,0 +1,189 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "fe77e507-d35d-4db8-978a-145d57a3256d",
+  "Name": "Integration1C",
+  "AsyncHandlers": [
+    {
+      "NameGuid": "fde27690-e139-45fd-b6f9-07b5e2b7e469",
+      "Name": "GetCompanyIn1CAsync",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": []
+    },
+    {
+      "NameGuid": "d7ebfb45-8708-43c9-b077-4e5bcaf7c628",
+      "Name": "SendCompanyIn1CAsync",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": []
+    },
+    {
+      "NameGuid": "51525f13-13cd-4b1a-9ee7-f90a913407be",
+      "Name": "GetIntegrationsResultsAsync",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": []
+    },
+    {
+      "NameGuid": "a5b55cbe-f0de-49f7-a1c8-a27f0b0518c1",
+      "Name": "GetContractualDocIn1CAsync",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": []
+    },
+    {
+      "NameGuid": "f27a4a8f-9b1a-453b-984f-05f793ebdab7",
+      "Name": "SendContractualDocsIn1CAsync",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": []
+    }
+  ],
+  "ClientAssemblyName": "aeon.Integration1C.Client",
+  "ClientBaseAssemblyName": "aeon.Integration1C.ClientBase",
+  "ClientBaseNamespace": "aeon.Integration1C.ClientBase",
+  "ClientNamespace": "aeon.Integration1C.Client",
+  "Code": "Integra",
+  "CompanyCode": "aeon",
+  "Cover": {
+    "NameGuid": "4757fc2c-e9d0-408b-9e9b-24bb6a86ceea",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "38058931-1a29-4a96-ac8c-e7b344832558",
+        "Name": "ShowSettingsIntegration",
+        "FunctionName": "ShowSettingsIntegration",
+        "GroupId": "8ebcc1ee-99e4-49dd-a3ee-49af916a7589"
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "130ea0a8-78c3-4f95-bfde-27339a3ca04b",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [
+      {
+        "NameGuid": "8ebcc1ee-99e4-49dd-a3ee-49af916a7589",
+        "Name": "SettingsGroup",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconSettingsGroup_8ebcc1ee99e449dda3ee49af916a7589.png"
+      }
+    ],
+    "Header": {
+      "NameGuid": "7e90b37d-1634-4c42-8a91-0fd4d8d4bb1c",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "Dependencies": [
+    {
+      "Id": "03c84aac-426c-4aa4-b41d-37c2286a7f39",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "50351646-6965-4e4a-a61e-39b2378f9cec"
+    },
+    {
+      "ItemId": "0202bdbf-9e2e-4b44-91d9-9b7b8d5b04ca",
+      "PreviousItemId": "50351646-6965-4e4a-a61e-39b2378f9cec"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "aeon.Integration1C",
+  "Jobs": [
+    {
+      "NameGuid": "9ec99ecd-ec2c-4bcd-b731-09cb2f6599ac",
+      "Name": "SendCompanyIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "c18285a9-b2fe-4fe1-b80a-72928eb81e23",
+      "Name": "GetDataIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "5d775a4b-05be-4f72-ba46-ccf73f3dc2a8",
+      "Name": "GetResultsIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "477dab9e-404b-4c75-a648-de39cc217b93",
+      "Name": "SendContractualDocsIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    }
+  ],
+  "Libraries": [
+    {
+      "NameGuid": "a4e39a14-cc7e-4a44-b766-e38f4a0c2cbc",
+      "Name": "Newtonsoft",
+      "Scope": "Both"
+    },
+    {
+      "NameGuid": "84688371-ed0f-4966-9830-fe4e8f56f61b",
+      "Name": "RabbitMQ",
+      "Scope": "Both"
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "ResponsibleForIntegration1CRoleGuid",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"D7E2B562-EF89-45D2-858A-336DE0CB5FF4\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "aeon.Integration1C",
+  "ResourcesKeys": [
+    "SettingsIntegrationName",
+    "ResponsibleFoIntegration1CRoleName",
+    "SubjectIntegrationError",
+    "LoggingMessageFromRabbitMQ",
+    "LegalEntityCounterpartyKind",
+    "NaturalPersonCounterpartyKind",
+    "SelfEmployedCounterpartyKind",
+    "SeparateSubdivisionCounterpartyKind",
+    "GovernmentBodyCounterpartyKind"
+  ],
+  "ServerAssemblyName": "aeon.Integration1C.Server",
+  "ServerNamespace": "aeon.Integration1C.Server",
+  "SharedAssemblyName": "aeon.Integration1C.Shared",
+  "SharedNamespace": "aeon.Integration1C.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.17",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

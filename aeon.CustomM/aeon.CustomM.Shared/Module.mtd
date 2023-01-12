@@ -1,0 +1,83 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "8ff11ae2-08fd-4549-a0fa-4c26f490f539",
+  "Name": "CustomM",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "aeon.CustomM.Client",
+  "ClientBaseAssemblyName": "aeon.CustomM.ClientBase",
+  "ClientBaseNamespace": "aeon.CustomM.ClientBase",
+  "ClientNamespace": "aeon.CustomM.Client",
+  "Code": "CustomM",
+  "CompanyCode": "aeon",
+  "Cover": {
+    "NameGuid": "924119a8-758f-427a-bfd9-7053759ee1d3",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "4c829ebf-4525-431d-b968-6c6c86ebdd1a",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "38400ca6-c93a-4dc3-8446-224cf7966d4f",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "Dependencies": [
+    {
+      "Id": "03c84aac-426c-4aa4-b41d-37c2286a7f39",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "2147fc59-3d71-4828-aeb7-9864049586b2"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "aeon.CustomM",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "ChiefAccountantsOurOrgs",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"E8487138-7B1E-4383-A5CF-B6BE6E80A969\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "aeon.CustomM",
+  "ResourcesKeys": [
+    "ChiefAccountantsOurOrgsName"
+  ],
+  "ServerAssemblyName": "aeon.CustomM.Server",
+  "ServerNamespace": "aeon.CustomM.Server",
+  "SharedAssemblyName": "aeon.CustomM.Shared",
+  "SharedNamespace": "aeon.CustomM.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.21",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

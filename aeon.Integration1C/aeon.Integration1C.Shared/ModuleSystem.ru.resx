@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Интеграция</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Интеграция с 1С</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для интеграции с информационной системой 1С: Управление холдингом </value>
+  </data>
+  <data name="CoverGroup_SettingsGroup" xml:space="preserve">
+    <value>Настройки интеграции</value>
+  </data>
+  <data name="CoverAction_ShowSettingsIntegration" xml:space="preserve">
+    <value>Адреса RabbitMQ</value>
+  </data>
+  <data name="CoverDescription_ShowSettingsIntegration" xml:space="preserve">
+    <value>Настройки отправки и получения сообщений RabbitMQ</value>
+  </data>
+  <data name="JobDisplayName_9ec99ecdec2c4bcdb73109cb2f6599ac" xml:space="preserve">
+    <value>Интеграция. Отправка Организаций в 1С</value>
+  </data>
+  <data name="JobDescription_9ec99ecdec2c4bcdb73109cb2f6599ac" xml:space="preserve">
+    <value>Отправка новых организаций в 1С: УХ.</value>
+  </data>
+  <data name="JobDisplayName_c18285a9b2fe4fe1b80a72928eb81e23" xml:space="preserve">
+    <value>Интеграция. Получение данных из 1С</value>
+  </data>
+  <data name="JobDescription_c18285a9b2fe4fe1b80a72928eb81e23" xml:space="preserve">
+    <value>Получение новых или измененных данных из 1С: УХ.</value>
+  </data>
+  <data name="AsyncHandler_Description_fde27690e13945fdb6f907b5e2b7e469" xml:space="preserve">
+    <value>Получение новых или измененных организаций из 1С: УХ.</value>
+  </data>
+  <data name="AsyncHandler_Description_d7ebfb45870843c9b0774e5bcaf7c628" xml:space="preserve">
+    <value>Отправка новых организаций в 1С: УХ.</value>
+  </data>
+  <data name="AsyncHandler_Description_51525f1313cd4b1a9ee7f90a913407be" xml:space="preserve">
+    <value>Получение результатов интеграции из 1С: УХ.</value>
+  </data>
+  <data name="JobDisplayName_5d775a4b05be4f72ba46ccf73f3dc2a8" xml:space="preserve">
+    <value>Интеграция. Получение результатов интеграции из 1С</value>
+  </data>
+  <data name="JobDescription_5d775a4b05be4f72ba46ccf73f3dc2a8" xml:space="preserve">
+    <value>Получение результатов интеграции из 1С: УХ.</value>
+  </data>
+  <data name="AsyncHandler_Description_a5b55cbef0de49f7a1c8a27f0b0518c1" xml:space="preserve">
+    <value>Получение новых или измененных договорных документов из 1С: УХ.</value>
+  </data>
+  <data name="JobDisplayName_477dab9e404b4c75a648de39cc217b93" xml:space="preserve">
+    <value>Интеграция. Отправка договорных документов в 1С</value>
+  </data>
+  <data name="JobDescription_477dab9e404b4c75a648de39cc217b93" xml:space="preserve">
+    <value>Отправка новых/измененных договорных документов в 1С: УХ.</value>
+  </data>
+  <data name="AsyncHandler_Description_f27a4a8f9b1a453b984f05f793ebdab7" xml:space="preserve">
+    <value>Отправка новых/измененных договорных документов в 1С: УХ.</value>
+  </data>
+</root>
