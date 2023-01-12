@@ -27,7 +27,7 @@ namespace aeon.AEOHSolution
         _obj.State.Properties.CounterpartyKind.IsEnabled = isCounterpartiesResponsible || isResponsibleForIntegration1C;
       }
       
-      Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), _obj.Nonresident.GetValueOrDefault());
+      Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), _obj.Nonresident.GetValueOrDefault(), _obj.CounterpartyKind);
     }
   }
 

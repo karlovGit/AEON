@@ -51,12 +51,28 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
           "ParentGuid": "bc420c32-0ecd-4b0d-8323-98a0b6d45c36",
           "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "952b2162-a68d-42bf-bdb3-b0e306af897f",
+          "Name": "IsMissingTRRC",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "bc420c32-0ecd-4b0d-8323-98a0b6d45c36",
+          "PropertyGuid": "a8bb8dd2-a6eb-4a5c-bb45-9dd6d75907df",
           "RowNumber": 1,
           "RowSpan": 1,
           "Settings": []
         }
       ]
     }
+  ],
+  "HandledEvents": [
+    "CreatedServer"
   ],
   "IconResourcesKeys": [],
   "IsStatusEnabled": true,
@@ -88,6 +104,14 @@
       "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a8bb8dd2-a6eb-4a5c-bb45-9dd6d75907df",
+      "Name": "IsMissingTRRC",
+      "Code": "IsMissingTRRC",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "a2b78d78-9dfc-4274-98bb-cd74aa8c67ac"
     }
   ],
   "PublicStructures": [],

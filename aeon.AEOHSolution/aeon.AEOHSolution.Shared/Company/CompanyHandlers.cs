@@ -10,6 +10,14 @@ namespace aeon.AEOHSolution
   partial class CompanySharedHandlers
   {
 
+    public virtual void CounterpartyKindChanged(aeon.AEOHSolution.Shared.CompanyCounterpartyKindChangedEventArgs e)
+    {
+      if (e.NewValue == e.OldValue)
+        return;
+      
+      Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), _obj.Nonresident.GetValueOrDefault(), e.NewValue);
+    }
+
     public virtual void RegNumberChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
     {
       if (e.NewValue != e.OldValue && !string.IsNullOrEmpty(e.NewValue))
@@ -21,7 +29,7 @@ namespace aeon.AEOHSolution
       base.NonresidentChanged(e);
       
       if (e.NewValue.HasValue && e.NewValue != e.OldValue)
-        Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), e.NewValue.Value);
+        Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), e.NewValue.Value, _obj.CounterpartyKind);
     }
 
     public override void TRRCChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
@@ -43,7 +51,7 @@ namespace aeon.AEOHSolution
     public virtual void IsForOfficeChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
     {
       if (e.NewValue.HasValue && e.NewValue != e.OldValue)
-        Functions.Company.IsRequiredTINAndTRRC(_obj, e.NewValue.Value, _obj.Nonresident.GetValueOrDefault());
+        Functions.Company.IsRequiredTINAndTRRC(_obj, e.NewValue.Value, _obj.Nonresident.GetValueOrDefault(), _obj.CounterpartyKind);
     }
 
   }

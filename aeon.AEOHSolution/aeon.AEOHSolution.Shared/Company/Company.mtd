@@ -585,6 +585,9 @@
       "Code": "CounterpartyKi",
       "EntityGuid": "0202bdbf-9e2e-4b44-91d9-9b7b8d5b04ca",
       "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "f3253916-499d-4f30-8041-6aa47fb10fc8"
     },
