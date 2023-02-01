@@ -211,14 +211,15 @@
     "NaturalPersonCounterpartyKind",
     "SelfEmployedCounterpartyKind",
     "SeparateSubdivisionCounterpartyKind",
-    "GovernmentBodyCounterpartyKind"
+    "GovernmentBodyCounterpartyKind",
+    "SqlDateTimeException"
   ],
   "ServerAssemblyName": "aeon.Integration1C.Server",
   "ServerNamespace": "aeon.Integration1C.Server",
   "SharedAssemblyName": "aeon.Integration1C.Shared",
   "SharedNamespace": "aeon.Integration1C.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.21",
+  "Version": "0.0.1.23",
   "Widgets": [],
   "Versions": [
     {

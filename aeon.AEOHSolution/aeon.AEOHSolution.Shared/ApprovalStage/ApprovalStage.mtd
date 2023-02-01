@@ -46,6 +46,32 @@
       "Versions": []
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetStageRecipients",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "approvalStage",
+          "ParameterType": "global::aeon.AEOHSolution.IApprovalStage",
+          "ParameterTypeFullName": "aeon.AEOHSolution.IApprovalStage, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "additionalApprovers",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {

@@ -16,6 +16,8 @@ namespace aeon.CustomM.Server
       
       CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.CompanyAAccount, "Бухгалтер компании А");
       CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.CompanyBAccount, "Бухгалтер компании Б");
+      CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.ManagerInit, "Согласование с вышестоящим руководителем");
+      CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.ManagersInit, "Согласование с вышестоящим руководителем (множественное)");
     }
     
     /// <summary>
@@ -40,6 +42,7 @@ namespace aeon.CustomM.Server
         role = CustomApprovalRoles.Create();
         role.Type = roleType;
       }
+      
       role.Description = description;
       role.Save();
     }

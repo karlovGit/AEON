@@ -50,7 +50,75 @@ namespace aeon.CustomM.Server
         return null;
       }
       
+      // Согласование с вышестоящим руководителем.
+      if (_obj.Type == aeon.CustomM.CustomApprovalRole.Type.ManagerInit)
+      {
+        var department = GetDepartment(task.Author);
+        return GetDepartmentManager(department);
+      }
+      
       return base.GetRolePerformer(task);
     }
+    
+    /// <summary>
+    /// Получить руководителя подразделения c проверкой вышестоящего подразделения.
+    /// </summary>
+    /// <param name="task">Задача.</param>
+    /// <returns>Сотрудник.</returns>
+    private Sungero.Company.IEmployee GetDepartmentManager(Sungero.Company.IDepartment department)
+    {
+      if (department == null)
+        return null;
+      
+      if (department.Manager != null)
+        return department.Manager;
+      
+      return GetDepartmentManager(department.HeadOffice);
+    }
+    
+    
+    // Получить список исполнителей из роли.
+    // <param name="task">Задача.</param>
+    // <returns>Список исполнителей.</returns>
+    [Remote(IsPure = true), Public]
+    public virtual List<Sungero.CoreEntities.IRecipient> GetRolePerformersN(Sungero.Docflow.IApprovalTask task)
+    {
+      var result = new List<Sungero.CoreEntities.IRecipient>();
+      
+      if (_obj.Type == aeon.CustomM.CustomApprovalRole.Type.ManagersInit)
+      {
+        var department = GetDepartment(task.Author);
+        result = GetDepartmentManagers(department, result);
+      }
+      
+      return result;
+    }
+    
+    public static Sungero.Company.IDepartment GetDepartment(IUser user)
+    {
+      var employee = Sungero.Company.Employees.GetAll().FirstOrDefault(u => Equals(u, user));
+      
+      if (employee == null)
+        return null;
+
+      return employee.Department;
+    }
+    
+    /// <summary>
+    /// Получить руководителя подразделения инициатора согласования.
+    /// </summary>
+    /// <param name="task">Задача.</param>
+    /// <returns>Сотрудник.</returns>
+    private List<Sungero.CoreEntities.IRecipient> GetDepartmentManagers(Sungero.Company.IDepartment department, List<Sungero.CoreEntities.IRecipient> result)
+    {
+      if (department == null)
+        return result;
+      
+      if (department.Manager != null)
+        result.Add(department.Manager);
+      
+      return GetDepartmentManagers(department.HeadOffice, result);
+    }
+    
   }
 }

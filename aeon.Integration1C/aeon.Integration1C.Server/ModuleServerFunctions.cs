@@ -14,6 +14,25 @@ namespace aeon.Integration1C.Server
   {
 
     /// <summary>
+    /// Проверить корректность даты.
+    /// </summary>
+    /// <param name="stringDate">Дата.</param>
+    /// <returns>Результат проверки.</returns>
+    public static string ValidateDate(string stringDate)
+    {
+      var result = string.Empty;
+      
+      if (string.IsNullOrEmpty(stringDate))
+        return result;
+      
+      var date = DateTime.Parse(stringDate);
+      if (date == null || !Calendar.Between(date, Calendar.SqlMinValue, Calendar.SqlMaxValue))
+        result = aeon.Integration1C.Resources.SqlDateTimeException;
+      
+      return result;
+    }
+
+    /// <summary>
     /// Получить роль "Ответственные за интеграцию с 1С".
     /// </summary>
     public static IRole GetResponsibleForIntegration1CRole()

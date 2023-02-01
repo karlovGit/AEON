@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -11,7 +11,7 @@ namespace aeon.Integration1C.Server
 
     public virtual void UpdateCompany(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.UpdateCompanyInvokeArgs args)
     {
-      var companies = AEOHSolution.Companies.GetAll();      
+      var companies = AEOHSolution.Companies.GetAll();
       var result = Functions.Module.DeserializeMessageFromCompany(args.Message);
       var resultBody = result.body;
       
@@ -110,8 +110,17 @@ namespace aeon.Integration1C.Server
         oldContractualDoc = contractualDocs.Where(c => c.Guid1C == resultBody.Guid).FirstOrDefault();
       
       var contractualDoc = oldContractualDoc != null ? oldContractualDoc : aeon.AEOHSolution.Contracts.Create();
+      
       try
       {
+        
+        // Проверить корректность дат.
+        foreach (var resultDate in new List<string>{ resultBody.RegistrationDate, resultBody.ValidTill, resultBody.ValidFrom })
+        {
+          var validateResult = Functions.Module.ValidateDate(resultDate);
+          if (validateResult != string.Empty)
+            throw new Exception(validateResult);
+        }
         
         #region Обновление свойств Договорного документа.
         

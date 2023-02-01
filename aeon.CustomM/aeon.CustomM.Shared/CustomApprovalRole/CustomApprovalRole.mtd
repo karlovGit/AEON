@@ -36,6 +36,16 @@
           "NameGuid": "46e26c5d-6d54-41de-85b0-b35419c0f7a2",
           "Name": "CompanyBAccount",
           "Code": "CompanyBAccount"
+        },
+        {
+          "NameGuid": "3b9505d9-d866-4ee8-9fd0-62b2cdb6aaba",
+          "Name": "ManagerInit",
+          "Code": "ManagerInit"
+        },
+        {
+          "NameGuid": "d0e0d503-33ad-4961-b28b-f751ced0e1db",
+          "Name": "ManagersInit",
+          "Code": "ManagersInit"
         }
       ],
       "IsAncestorMetadata": true,
@@ -43,6 +53,27 @@
         "Values"
       ],
       "Versions": []
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetRolePerformersN",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "customApprovalRole",
+          "ParameterType": "global::aeon.CustomM.ICustomApprovalRole",
+          "ParameterTypeFullName": "aeon.CustomM.ICustomApprovalRole, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],

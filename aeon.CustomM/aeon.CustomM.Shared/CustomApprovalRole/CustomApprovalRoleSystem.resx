@@ -123,4 +123,10 @@
   <data name="Enum_Type_CompanyBAccount" xml:space="preserve">
     <value>Company B accountant</value>
   </data>
+  <data name="Enum_Type_ManagerInit" xml:space="preserve">
+    <value>Coordination with senior management</value>
+  </data>
+  <data name="Enum_Type_ManagersInit" xml:space="preserve">
+    <value>Supervisory approval (multiple)</value>
+  </data>
 </root>

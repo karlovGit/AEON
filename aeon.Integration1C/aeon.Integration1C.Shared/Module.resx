@@ -144,4 +144,7 @@
   <data name="GovernmentBodyCounterpartyKind" xml:space="preserve">
     <value>Government body</value>
   </data>
+  <data name="SqlDateTimeException" xml:space="preserve">
+    <value>SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.</value>
+  </data>
 </root>

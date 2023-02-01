@@ -18,6 +18,13 @@ namespace aeon.AEOHSolution.Shared
       {
         baseRoles.Add(aeon.CustomM.CustomApprovalRole.Type.CompanyAAccount);
         baseRoles.Add(aeon.CustomM.CustomApprovalRole.Type.CompanyBAccount);
+        baseRoles.Add(aeon.CustomM.CustomApprovalRole.Type.ManagersInit);
+      }
+      
+      if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Approvers || _obj.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr ||
+          _obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Notice && _obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Manager)
+      {
+        baseRoles.Add(aeon.CustomM.CustomApprovalRole.Type.ManagerInit);
       }
 
       return baseRoles;

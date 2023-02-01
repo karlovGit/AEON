@@ -123,4 +123,10 @@
   <data name="Enum_Type_CompanyBAccount" xml:space="preserve">
     <value>Бухгалтер компании Б</value>
   </data>
+  <data name="Enum_Type_ManagerInit" xml:space="preserve">
+    <value>Согласование с вышестоящим руководителем</value>
+  </data>
+  <data name="Enum_Type_ManagersInit" xml:space="preserve">
+    <value>Согласование с вышестоящим руководителем (множественное)</value>
+  </data>
 </root>
