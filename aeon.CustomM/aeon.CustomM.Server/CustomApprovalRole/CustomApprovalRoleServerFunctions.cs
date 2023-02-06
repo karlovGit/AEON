@@ -88,7 +88,13 @@ namespace aeon.CustomM.Server
       if (_obj.Type == aeon.CustomM.CustomApprovalRole.Type.ManagersInit)
       {
         var department = GetDepartment(task.Author);
-        result = GetDepartmentManagers(department, result);
+        var firstManager = GetDepartmentManager(department);
+        
+        if (firstManager != null)
+        {
+          result = GetDepartmentManagers(department, result);
+          result.Remove(firstManager);
+        }
       }
       
       return result;

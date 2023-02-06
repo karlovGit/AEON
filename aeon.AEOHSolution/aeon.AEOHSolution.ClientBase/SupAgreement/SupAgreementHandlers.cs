@@ -16,7 +16,8 @@ namespace aeon.AEOHSolution
       
       if (_obj.DocumentKind != null)
       {
-        var isLoanAgreement = aeon.AEOHSolution.DocumentKinds.As(_obj.DocumentKind).LoanAgreement.GetValueOrDefault();
+        var isLoanAgreement = _obj.DocumentKind != null && aeon.AEOHSolution.DocumentKinds.As(_obj.DocumentKind).LoanAgreement.GetValueOrDefault() 
+          || _obj.LeadingDocument != null && aeon.AEOHSolution.DocumentKinds.As(_obj.LeadingDocument.DocumentKind).LoanAgreement.GetValueOrDefault();
         
         _obj.State.Properties.PercentagePerAnnum.IsVisible = isLoanAgreement;
         _obj.State.Properties.TransferDeadlineUp.IsVisible = isLoanAgreement;

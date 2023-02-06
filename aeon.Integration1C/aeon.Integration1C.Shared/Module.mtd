@@ -219,7 +219,7 @@
   "SharedAssemblyName": "aeon.Integration1C.Shared",
   "SharedNamespace": "aeon.Integration1C.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.23",
+  "Version": "0.0.1.25",
   "Widgets": [],
   "Versions": [
     {
