@@ -124,8 +124,6 @@ namespace aeon.Integration1C.Server
         
         #region Обновление свойств Договорного документа.
         
-        contractualDoc.Subject = contractualDoc.Subject != resultBody.Name ? resultBody.Name : contractualDoc.Subject;
-        
         if (resultBody.DocumentKind.HasValue)
         {
           var kind = Functions.Module.GetDocumentKindFromId(resultBody.DocumentKind.Value);
@@ -200,7 +198,6 @@ namespace aeon.Integration1C.Server
           : contractualDoc.PercentagePerAnnum;
         
         contractualDoc.Guid1C = contractualDoc.Guid1C != resultBody.Guid ? resultBody.Guid : contractualDoc.Guid1C;
-        contractualDoc.Name = contractualDoc.Name != resultBody.Name ? resultBody.Name : contractualDoc.Name;
         
         #endregion
         
@@ -232,6 +229,10 @@ namespace aeon.Integration1C.Server
       foreach (var document in contractualDocs)
       {
         if (Locks.GetLockInfo(document).IsLocked)
+          continue;
+        
+        var supAgreement = aeon.AEOHSolution.SupAgreements.As(document);
+        if (supAgreement != null && (supAgreement.LeadingDocument == null || (supAgreement.LeadingDocument != null && string.IsNullOrEmpty(supAgreement.LeadingDocument.Guid1C))))
           continue;
         
         try

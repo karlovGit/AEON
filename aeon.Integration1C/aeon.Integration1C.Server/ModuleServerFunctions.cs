@@ -479,7 +479,6 @@ namespace aeon.Integration1C.Server
       
       var description = Structures.Module.ContractualDocDescriptionSending.Create();
       description.Id = document.Id;
-      description.Name = document.Name;
       if (document.DocumentKind != null)
         description.DocumentKind = document.DocumentKind.Id;
       
@@ -507,6 +506,12 @@ namespace aeon.Integration1C.Server
       description.InternalApprovalState = document.InternalApprovalState.HasValue ? document.InternalApprovalState.Value.ToString() : string.Empty;
       description.ExternalApprovalState = document.ExternalApprovalState.HasValue ? document.ExternalApprovalState.Value.ToString() : string.Empty;
       description.Percentage = document.PercentagePerAnnum;
+      var contractGuid = string.Empty;
+      var supAgreement = aeon.AEOHSolution.SupAgreements.As(document);
+      if (supAgreement != null && supAgreement.LeadingDocument != null)
+        contractGuid = supAgreement.LeadingDocument.Guid1C;
+      
+      description.ContractGuid = contractGuid;
       description.Guid = !string.IsNullOrEmpty(document.Guid1C) ? document.Guid1C : string.Empty;
       json.body = description;
       

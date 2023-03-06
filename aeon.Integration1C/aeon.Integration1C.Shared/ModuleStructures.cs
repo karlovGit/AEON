@@ -44,8 +44,6 @@ namespace aeon.Integration1C.Structures.Module
   {
     public int Id { get; set; }
     
-    public string Name { get; set; }
-    
     public int? DocumentKind { get; set; }
     
     public int? ContractCategory { get; set; }
@@ -78,6 +76,8 @@ namespace aeon.Integration1C.Structures.Module
     
     public double? Percentage { get; set; }
     
+    public string ContractGuid { get; set; }
+    
     public string Guid { get; set; }
   }
   
@@ -106,8 +106,6 @@ namespace aeon.Integration1C.Structures.Module
   /// </summary>
   partial class ContractualDocDescriptionGetting
   {
-    public string Name { get; set; }
-    
     public int? DocumentKind { get; set; }
     
     public int? ContractCategory { get; set; }
