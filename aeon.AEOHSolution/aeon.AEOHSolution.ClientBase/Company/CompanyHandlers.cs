@@ -19,7 +19,7 @@ namespace aeon.AEOHSolution
       if (!isAdministrator)
       {
         var isCounterpartiesResponsible = currentUser.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.CounterpartiesResponsibleRole);
-        var isResponsibleForIntegration1C = currentUser.IncludedIn(aeon.Integration1C.PublicConstants.Module.ResponsibleForIntegration1CRoleGuid);
+        var isResponsibleForIntegration1C = currentUser.IncludedIn(Integration1C.PublicConstants.Module.ResponsibleForIntegration1CRoleGuid);
         var isClerks = currentUser.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.ClerksRole);
         
         _obj.State.Properties.Guid1C.IsEnabled = isResponsibleForIntegration1C;

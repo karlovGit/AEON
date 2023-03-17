@@ -17,7 +17,14 @@ namespace aeon.Integration1C.Server
     [Public]
     public static ISettingsIntegration GetSettingsIntegration()
     {
-      return SettingsIntegrations.GetAll().FirstOrDefault();
+      var settingsIntegration = SettingsIntegrations.Null;
+      AccessRights.AllowRead(
+        () =>
+        {
+          settingsIntegration = SettingsIntegrations.GetAll().FirstOrDefault();
+        });
+      
+      return settingsIntegration;
     }
 
   }

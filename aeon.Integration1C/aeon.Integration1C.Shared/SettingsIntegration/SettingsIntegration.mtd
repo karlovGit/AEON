@@ -319,6 +319,24 @@
           "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d885fdc8-5be6-445d-8627-869a1117bd24",
+          "Name": "ContractsAccount",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
+          "ParentGuid": "783e268f-d3b5-4982-ba52-02adb73e581a",
+          "PropertyGuid": "6afe1cc2-b1b8-4412-8688-3961d11974e6",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "NavigationPropertyGuid",
+              "Value": "9363be76-e56f-433f-ac8a-53cfee1e9a80"
+            }
+          ]
         }
       ]
     }
@@ -503,6 +521,15 @@
       "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "3de3d8d1-6356-4b74-bf01-4ba32a8df089"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6afe1cc2-b1b8-4412-8688-3961d11974e6",
+      "Name": "ContractsAccount",
+      "Code": "SettingsInteg1",
+      "EntityGuid": "e10d8a19-f93e-4947-a8d9-da18dee7b08b",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "7bd015e9-f970-444b-9214-0a6f85dde9e3"
     }
   ],
   "PublicFunctions": [

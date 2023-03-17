@@ -14,7 +14,7 @@ namespace aeon.AEOHSolution
     {
       base.BeforeSave(e);
       
-      #region Изменение свойств для интеграции с 1С.
+      #region Заполнение свойств для интеграции с 1С.
       
       if ((_obj.State.IsInserted && string.IsNullOrEmpty(_obj.Guid1C)) || (!Users.Current.IsSystem.GetValueOrDefault() && _obj.State.IsChanged))
       {
@@ -22,10 +22,29 @@ namespace aeon.AEOHSolution
         _obj.IsSuccessfullyCreated1C = false;
       }
       
-      if (_obj.State.Properties.IsSuccessfullyCreated1C.IsChanged)
+      if (_obj.State.Properties.IsSuccessfullyCreated1C.IsChanged && _obj.IsSuccessfullyCreated1C.GetValueOrDefault())
         _obj.CorrelationId = null;
       
       #endregion
+      
+      #region Сделать договорной документ Действующим, для отправки в 1С.
+      
+      var settingIntegration = Integration1C.PublicFunctions.SettingsIntegration.GetSettingsIntegration();
+      if (_obj.State.Properties.RegistrationState.IsChanged && _obj.RegistrationState == RegistrationState.Registered &&
+          settingIntegration.ContractsAccount.Any(k => Equals(k.DocumentKind, _obj.DocumentKind)))
+      {
+        if (_obj.LifeCycleState != LifeCycleState.Active)
+          _obj.LifeCycleState = LifeCycleState.Active;
+        
+        if (_obj.InternalApprovalState != InternalApprovalState.Signed)
+          _obj.InternalApprovalState = InternalApprovalState.Signed;
+        
+        if (_obj.ExternalApprovalState != ExternalApprovalState.Signed)
+          _obj.ExternalApprovalState = ExternalApprovalState.Signed;
+      }
+      
+      #endregion
+      
     }
 
     public override void Created(Sungero.Domain.CreatedEventArgs e)

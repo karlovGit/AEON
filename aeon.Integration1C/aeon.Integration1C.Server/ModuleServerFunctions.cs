@@ -35,90 +35,91 @@ namespace aeon.Integration1C.Server
     /// <summary>
     /// Получить роль "Ответственные за интеграцию с 1С".
     /// </summary>
+    /// <returns>Роль "Ответственные за интеграцию с 1С".</returns>
     public static IRole GetResponsibleForIntegration1CRole()
     {
       return Roles.GetAll(r => r.Sid == Constants.Module.ResponsibleForIntegration1CRoleGuid).SingleOrDefault();
     }
 
     /// <summary>
-    /// Получить Состояние и Согласование для договорного документа.
+    /// Получить значения полей Состояние и Согласование для договорного документа.
     /// </summary>
-    /// <param name="lifeCycleState">Состояние договора.</param>
-    /// <param name="status">Статус.</param>
-    /// <returns>Состояние и Согласование.</returns>
-    public static Structures.Module.StateForContractualDoc GetStateForContractualDoc(string lifeCycleState, string status, aeon.AEOHSolution.IContractualDocument document)
+    /// <param name="lifeCycleState">Состояние документа из 1С.</param>
+    /// <param name="status">Статус документа из 1С.</param>
+    /// <returns>Состояние и Согласование в Directum RX.</returns>
+    public static Structures.Module.StateForContractualDoc GetStateForContractualDoc(string lifeCycleState, string status, AEOHSolution.IContractualDocument document)
     {
       var state = Structures.Module.StateForContractualDoc.Create();
       
       // Черновик.
       if (lifeCycleState == Constants.Module.StateContractualDoc.Draft)
       {
-        state.LifeCycleState = aeon.AEOHSolution.ContractualDocument.LifeCycleState.Draft;
+        state.LifeCycleState = AEOHSolution.ContractualDocument.LifeCycleState.Draft;
         
         // На утверждении.
         if (status == Constants.Module.StateContractualDoc.OnSigning)
-          state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.OnApproval;
+          state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.OnApproval;
       }
       // Отправлен на уточнение и Отправлен на уточнение.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.OnRework &&
                status == Constants.Module.StateContractualDoc.OnRework)
       {
-        state.LifeCycleState = aeon.AEOHSolution.ContractualDocument.LifeCycleState.Draft;
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.OnRework;
+        state.LifeCycleState = AEOHSolution.ContractualDocument.LifeCycleState.Draft;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.OnRework;
       }
       // Передан на подпись организации и На утверждении.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.OnSigningCompany &&
                status == Constants.Module.StateContractualDoc.OnSigning)
       {
-        state.LifeCycleState = aeon.AEOHSolution.ContractualDocument.LifeCycleState.Draft;
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.PendingSign;
+        state.LifeCycleState = AEOHSolution.ContractualDocument.LifeCycleState.Draft;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.PendingSign;
       }
       // Передан на подпись контрагенту и На утверждении.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.OnSigningCounterparty &&
                status == Constants.Module.StateContractualDoc.OnSigning)
       {
-        state.LifeCycleState = aeon.AEOHSolution.ContractualDocument.LifeCycleState.Draft;
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
-        state.ExternalApprovalState = aeon.AEOHSolution.ContractualDocument.ExternalApprovalState.OnApproval;
+        state.LifeCycleState = AEOHSolution.ContractualDocument.LifeCycleState.Draft;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
+        state.ExternalApprovalState = AEOHSolution.ContractualDocument.ExternalApprovalState.OnApproval;
       }
       // Подписан и Утвержден.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.Signing &&
                status == Constants.Module.StateContractualDoc.Approved)
       {
-        state.LifeCycleState = aeon.AEOHSolution.ContractualDocument.LifeCycleState.Draft;
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
-        state.ExternalApprovalState = aeon.AEOHSolution.ContractualDocument.ExternalApprovalState.Signed;
+        state.LifeCycleState = AEOHSolution.ContractualDocument.LifeCycleState.Draft;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
+        state.ExternalApprovalState = AEOHSolution.ContractualDocument.ExternalApprovalState.Signed;
       }
       // Исполняется и Утвержден.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.Active &&
                status == Constants.Module.StateContractualDoc.Approved)
       {
-        state.LifeCycleState = aeon.AEOHSolution.ContractualDocument.LifeCycleState.Active;
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
-        state.ExternalApprovalState = aeon.AEOHSolution.ContractualDocument.ExternalApprovalState.Signed;
+        state.LifeCycleState = AEOHSolution.ContractualDocument.LifeCycleState.Active;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
+        state.ExternalApprovalState = AEOHSolution.ContractualDocument.ExternalApprovalState.Signed;
       }
       // Исполнен и Утвержден.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.Closed &&
                status == Constants.Module.StateContractualDoc.Approved)
       {
-        state.LifeCycleState = aeon.AEOHSolution.Contracts.Is(document)
-          ? aeon.AEOHSolution.Contract.LifeCycleState.Closed
-          : aeon.AEOHSolution.SupAgreement.LifeCycleState.Closed;
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
-        state.ExternalApprovalState = aeon.AEOHSolution.ContractualDocument.ExternalApprovalState.Signed;
+        state.LifeCycleState = AEOHSolution.Contracts.Is(document)
+          ? AEOHSolution.Contract.LifeCycleState.Closed
+          : AEOHSolution.SupAgreement.LifeCycleState.Closed;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.Signed;
+        state.ExternalApprovalState = AEOHSolution.ContractualDocument.ExternalApprovalState.Signed;
       }
       // Расторгнут и Последний статус.
       else if (lifeCycleState == Constants.Module.StateContractualDoc.Terminated)
       {
-        state.LifeCycleState = aeon.AEOHSolution.Contract.LifeCycleState.Terminated;
+        state.LifeCycleState = AEOHSolution.Contract.LifeCycleState.Terminated;
       }
       
       if (document.State.IsInserted && document.DocumentKind != null &&
           aeon.AEOHSolution.DocumentKinds.As(document.DocumentKind).LoanAgreement.GetValueOrDefault())
         
       {
-        state.InternalApprovalState = aeon.AEOHSolution.ContractualDocument.InternalApprovalState.PendingSign;
-        state.ExternalApprovalState = aeon.AEOHSolution.ContractualDocument.ExternalApprovalState.OnApproval;
+        state.InternalApprovalState = AEOHSolution.ContractualDocument.InternalApprovalState.PendingSign;
+        state.ExternalApprovalState = AEOHSolution.ContractualDocument.ExternalApprovalState.OnApproval;
       }
       
       return state;
@@ -151,11 +152,11 @@ namespace aeon.Integration1C.Server
     /// <param name="id">ИД сущности.</param>
     /// <param name="guid">Guid сущности.</param>
     /// <param name="correlation_id">ИД события.</param>
+    /// <returns>Сообщение об успешном создании/обновлении.</returns>
     public static string SerializeMessageFromResult(int id, string guid, string correlation_id)
     {
       var setting = Functions.SettingsIntegration.GetSettingsIntegration();
       var queueName = setting.QueueSendForVerification;
-      
       var message = string.Empty;
       
       var json = Structures.Module.ResultMesageFromRabbitMQ.Create();
@@ -163,14 +164,15 @@ namespace aeon.Integration1C.Server
       json.message_date = Calendar.Now.ToString();
       json.correlation_id = correlation_id;
       json.event_name = queueName;
+      
       var description = Structures.Module.ResultUpdateEntityFrom1C.Create();
       description.Id = id;
       description.Guid = guid;
       description.Verification = true;
       description.ErrorText = string.Empty;
       json.body = description;
-      
       message = JsonConvert.SerializeObject(json);
+      
       return message;
     }
 
@@ -179,11 +181,11 @@ namespace aeon.Integration1C.Server
     /// </summary>
     /// <param name="error">Ошибка.</param>
     /// <param name="correlation_id">ИД события.</param>
+    /// <returns>Сообщение об ошибке.</returns>
     public static string SerializeMessageFromError(string error, string correlation_id)
     {
       var setting = Functions.SettingsIntegration.GetSettingsIntegration();
       var queueName = setting.QueueErrors;
-      
       var message = string.Empty;
       
       var json = Structures.Module.ErrorMesageFromRabbitMQ.Create();
@@ -191,12 +193,13 @@ namespace aeon.Integration1C.Server
       json.message_date = Calendar.Now.ToString();
       json.correlation_id = correlation_id;
       json.event_name = queueName;
+      
       var description = Structures.Module.ErrorUpdateEntityFrom1C.Create();
       description.Verification = false;
       description.ErrorText = error;
       json.body = description;
-      
       message = JsonConvert.SerializeObject(json);
+      
       return message;
     }
     
@@ -205,7 +208,7 @@ namespace aeon.Integration1C.Server
     #region Получить данные для обновления сущности.
     
     /// <summary>
-    /// Получить Валюту по Коду.
+    /// Получить Валюту по коду.
     /// </summary>
     /// <param name="code">Код.</param>
     /// <returns>Валюта.</returns>
@@ -231,7 +234,7 @@ namespace aeon.Integration1C.Server
     /// <returns>Контрагент.</returns>
     public static aeon.AEOHSolution.ICompany GetCompanyFromGuid(string guid)
     {
-      return aeon.AEOHSolution.Companies.GetAll(c => c.Guid1C == guid).FirstOrDefault();
+      return AEOHSolution.Companies.GetAll(c => c.Guid1C == guid).FirstOrDefault();
     }
     
     /// <summary>
@@ -269,7 +272,7 @@ namespace aeon.Integration1C.Server
     }
 
     /// <summary>
-    /// Получить Страну по коду. Если страны нет то создать новую.
+    /// Получить Страну по коду. Если страны нет, то создать новую.
     /// </summary>
     /// <param name="code">Код.</param>
     /// <param name="name">Наименование.</param>
@@ -339,7 +342,7 @@ namespace aeon.Integration1C.Server
     /// Получить сообщения из RabbitMQ.
     /// </summary>
     /// <param name="queue">Имя очереди.</param>
-    /// <param name="routingKey">Ключ очереди.</param>
+    /// <returns>Сообщения из RabbitMQ.</returns>
     public static List<string> GetMessagesFromRabbitMQ(string queue)
     {
       var setting = Functions.SettingsIntegration.GetSettingsIntegration();
@@ -378,7 +381,6 @@ namespace aeon.Integration1C.Server
     /// Отправить сообщение в RabbitMQ.
     /// </summary>
     /// <param name="json">Json.</param>
-    /// <param name="exchange">Точка доступа.</param>
     /// <param name="routingKey">Ключ очереди.</param>
     public void SendMessageFromRabbitMQ(string json, string routingKey)
     {
@@ -466,7 +468,7 @@ namespace aeon.Integration1C.Server
     /// <param name="document">Договорной документ.</param>
     /// <param name="correlationID">ИД отправляемого запроса.</param>
     /// <param name="queueName">Имя очереди.</param>
-    /// <returns>Json.</returns>
+    /// <returns>Сформированный Json.</returns>
     public static string SerializeMessageFromContractualDoc(aeon.AEOHSolution.IContractualDocument document, string correlationID, string queueName)
     {
       var message = string.Empty;
@@ -479,6 +481,7 @@ namespace aeon.Integration1C.Server
       
       var description = Structures.Module.ContractualDocDescriptionSending.Create();
       description.Id = document.Id;
+      
       if (document.DocumentKind != null)
         description.DocumentKind = document.DocumentKind.Id;
       
@@ -491,12 +494,14 @@ namespace aeon.Integration1C.Server
         description.BusinessUnitKPP = document.BusinessUnit.TRRC;
       }
       description.Counterparty = aeon.AEOHSolution.Companies.As(document.Counterparty).Guid1C;
+      
       if (document.ResponsibleEmployee != null)
         description.ResponsibleEmployee = document.ResponsibleEmployee.Name;
       
       description.ValidFrom = document.ValidFrom.HasValue ? document.ValidFrom.Value.ToShortDateString() : null;
       description.ValidTill = document.ValidTill.HasValue ? document.ValidTill.Value.ToShortDateString() : null;
       description.TotalAmount = document.TotalAmount;
+      
       if (document.Currency != null)
         description.Currency = document.Currency.NumericCode;
       
@@ -506,16 +511,18 @@ namespace aeon.Integration1C.Server
       description.InternalApprovalState = document.InternalApprovalState.HasValue ? document.InternalApprovalState.Value.ToString() : string.Empty;
       description.ExternalApprovalState = document.ExternalApprovalState.HasValue ? document.ExternalApprovalState.Value.ToString() : string.Empty;
       description.Percentage = document.PercentagePerAnnum;
+      
       var contractGuid = string.Empty;
       var supAgreement = aeon.AEOHSolution.SupAgreements.As(document);
+      
       if (supAgreement != null && supAgreement.LeadingDocument != null)
         contractGuid = supAgreement.LeadingDocument.Guid1C;
       
       description.ContractGuid = contractGuid;
       description.Guid = !string.IsNullOrEmpty(document.Guid1C) ? document.Guid1C : string.Empty;
       json.body = description;
-      
       message = JsonConvert.SerializeObject(json);
+      
       return message;
     }
     
@@ -525,7 +532,7 @@ namespace aeon.Integration1C.Server
     /// <param name="company">Организация.</param>
     /// <param name="correlationID">ИД отправляемого запроса.</param>
     /// <param name="queueName">Имя очереди.</param>
-    /// <returns>Json.</returns>
+    /// <returns>Сформированный Json.</returns>
     public static string SerializeMessageFromCompany(aeon.AEOHSolution.ICompany company, string correlationID, string queueName)
     {
       var message = string.Empty;
@@ -535,13 +542,14 @@ namespace aeon.Integration1C.Server
       json.message_date = Calendar.Now.ToString();
       json.correlation_id = correlationID;
       json.event_name = queueName;
+      
       var description = Structures.Module.CompanyDescriptionSending.Create();
       description.TIN = !string.IsNullOrEmpty(company.TIN) ? company.TIN : string.Empty;
       description.TRRC = !string.IsNullOrEmpty(company.TRRC) ? company.TRRC : string.Empty;
       description.Id = company.Id.ToString();
       json.body = description;
-      
       message = JsonConvert.SerializeObject(json);
+      
       return message;
     }
     

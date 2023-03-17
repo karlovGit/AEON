@@ -26,12 +26,12 @@ namespace aeon.AEOHSolution.Shared
     /// </summary>
     /// <param name="isForOffice">Для канцелярии.</param>
     /// <param name="nonresident">Нерезидент.</param>
-    /// <param name="counterKind">Вид контрагента.</param>
-    public void IsRequiredTINAndTRRC(bool isForOffice, bool nonresident, Integration1C.ICounterpartyKind counterKind)
+    /// <param name="counterpartyKind">Вид контрагента.</param>
+    public void IsRequiredTINAndTRRC(bool isForOffice, bool nonresident, Integration1C.ICounterpartyKind counterpartyKind)
     {
       _obj.State.Properties.TIN.IsRequired = !isForOffice && !nonresident;
       _obj.State.Properties.TRRC.IsRequired = !isForOffice && !nonresident &&
-        (counterKind == null || (counterKind != null && !counterKind.IsMissingTRRC.GetValueOrDefault()));
+        (counterpartyKind == null || (counterpartyKind != null && !counterpartyKind.IsMissingTRRC.GetValueOrDefault()));
       _obj.State.Properties.RegNumber.IsRequired = nonresident && !isForOffice;
     }
 

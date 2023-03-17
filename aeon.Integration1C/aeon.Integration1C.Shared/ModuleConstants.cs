@@ -6,10 +6,10 @@ namespace aeon.Integration1C.Constants
   public static class Module
   {
 
-    #region Состояния договорного документа.
+    #region Состояния договорного документа в 1С.
     
     /// <summary>
-    /// Состояния договорного документа из 1С.
+    /// Состояния договорного документа в 1С.
     /// </summary>
     public static class StateContractualDoc
     {

@@ -53,7 +53,7 @@ namespace aeon.Integration1C.Server
     }
 
     /// <summary>
-    /// Создать роли.
+    /// Создать предопределенные роли.
     /// </summary>
     public static void CreateRoles()
     {

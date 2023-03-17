@@ -14,7 +14,7 @@ namespace aeon.AEOHSolution
     {
       base.BeforeSave(e);
       
-      #region Изменение свойств для интеграции с 1С.
+      #region Заполнение свойств для интеграции с 1С.
       
       if (_obj.State.IsInserted && !_obj.IsCardReadOnly.GetValueOrDefault() && string.IsNullOrEmpty(_obj.Guid1C))
         _obj.IsMustBeSent1C = true;

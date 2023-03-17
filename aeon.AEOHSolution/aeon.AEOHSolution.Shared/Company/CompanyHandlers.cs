@@ -20,7 +20,10 @@ namespace aeon.AEOHSolution
 
     public virtual void RegNumberChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
     {
-      if (e.NewValue != e.OldValue && !string.IsNullOrEmpty(e.NewValue))
+      if (e.NewValue == e.OldValue)
+        return;
+      
+      if (!string.IsNullOrEmpty(e.NewValue))
         _obj.IsForOffice = false;
     }
 
@@ -28,7 +31,10 @@ namespace aeon.AEOHSolution
     {
       base.NonresidentChanged(e);
       
-      if (e.NewValue.HasValue && e.NewValue != e.OldValue)
+      if (e.NewValue == e.OldValue)
+        return;
+      
+      if (e.NewValue.HasValue)
         Functions.Company.IsRequiredTINAndTRRC(_obj, _obj.IsForOffice.GetValueOrDefault(), e.NewValue.Value, _obj.CounterpartyKind);
     }
 
@@ -36,7 +42,10 @@ namespace aeon.AEOHSolution
     {
       base.TRRCChanged(e);
       
-      if (e.NewValue != e.OldValue && !string.IsNullOrEmpty(e.NewValue))
+      if (e.NewValue == e.OldValue)
+        return;
+      
+      if (!string.IsNullOrEmpty(e.NewValue))
         Functions.Company.ChangeIsForOffice(_obj, _obj.TIN, e.NewValue);
     }
 
@@ -44,13 +53,19 @@ namespace aeon.AEOHSolution
     {
       base.TINChanged(e);
       
-      if (e.NewValue != e.OldValue && !string.IsNullOrEmpty(e.NewValue))
+      if (e.NewValue == e.OldValue)
+        return;
+      
+      if (!string.IsNullOrEmpty(e.NewValue))
         Functions.Company.ChangeIsForOffice(_obj, e.NewValue, _obj.TRRC);
     }
 
     public virtual void IsForOfficeChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
     {
-      if (e.NewValue.HasValue && e.NewValue != e.OldValue)
+      if (e.NewValue == e.OldValue)
+        return;
+      
+      if (e.NewValue.HasValue)
         Functions.Company.IsRequiredTINAndTRRC(_obj, e.NewValue.Value, _obj.Nonresident.GetValueOrDefault(), _obj.CounterpartyKind);
     }
 

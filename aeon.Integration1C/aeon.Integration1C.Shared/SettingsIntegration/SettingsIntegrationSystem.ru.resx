@@ -204,4 +204,7 @@
   <data name="ControlGroup_783e268fd3b54982ba5202adb73e581a" xml:space="preserve">
     <value>Дополнительно</value>
   </data>
+  <data name="Property_ContractsAccount" xml:space="preserve">
+    <value>Договоры-счета</value>
+  </data>
 </root>

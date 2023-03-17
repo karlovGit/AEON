@@ -7,18 +7,66 @@ using Sungero.CoreEntities;
 namespace aeon.Integration1C.Structures.Module
 {
 
+  #region Результаты интеграции.
+  
   /// <summary>
-  /// Сопоставить Состояние и Согласование для договорного документа.
+  /// Структура сообщения успешного создания/обновления сущности из 1С.
   /// </summary>
-  partial class StateForContractualDoc
+  partial class ResultMesageFromRabbitMQ
   {
-    public Sungero.Core.Enumeration? LifeCycleState { get; set; }
+    public string message_id { get; set; }
     
-    public Sungero.Core.Enumeration? InternalApprovalState { get; set; }
+    public string message_date { get; set; }
     
-    public Sungero.Core.Enumeration? ExternalApprovalState { get; set; }
+    public string correlation_id { get; set; }
+    
+    public string event_name { get; set; }
+    
+    public aeon.Integration1C.Structures.Module.ResultUpdateEntityFrom1C body { get; set; }
+  }
+  
+  /// <summary>
+  /// Структура Json успешного создания/обновления сущности из 1С.
+  /// </summary>
+  partial class ResultUpdateEntityFrom1C
+  {
+    public int Id { get; set; }
+    
+    public string Guid { get; set; }
+    
+    public bool Verification { get; set; }
+    
+    public string ErrorText { get; set; }
   }
 
+  /// <summary>
+  /// Структура сообщения ошибки создания/обновления сущности из 1С.
+  /// </summary>
+  partial class ErrorMesageFromRabbitMQ
+  {
+    public string message_id { get; set; }
+    
+    public string message_date { get; set; }
+    
+    public string correlation_id { get; set; }
+    
+    public string event_name { get; set; }
+    
+    public aeon.Integration1C.Structures.Module.ErrorUpdateEntityFrom1C body { get; set; }
+  }
+  
+  /// <summary>
+  /// Структура Json ошибки создания/обновления сущности из 1С.
+  /// </summary>
+  partial class ErrorUpdateEntityFrom1C
+  {
+    public bool Verification { get; set; }
+    
+    public string ErrorText { get; set; }
+  }
+  
+  #endregion
+  
   #region Отправка Договорных документов в 1С.
   
   /// <summary>
@@ -141,14 +189,26 @@ namespace aeon.Integration1C.Structures.Module
     public string Id { get; set; }
   }
   
+  /// <summary>
+  /// Сопоставление полей Состояние и Согласование для договорного документа.
+  /// </summary>
+  partial class StateForContractualDoc
+  {
+    public Sungero.Core.Enumeration? LifeCycleState { get; set; }
+    
+    public Sungero.Core.Enumeration? InternalApprovalState { get; set; }
+    
+    public Sungero.Core.Enumeration? ExternalApprovalState { get; set; }
+  }
+  
   #endregion
-
-  #region Результаты интеграции.
+  
+  #region Отправка Организации в 1С.
   
   /// <summary>
-  /// Структура сообщения успешного создания/обновления сущности из 1С.
+  /// Структура сообщения отправки Организации.
   /// </summary>
-  partial class ResultMesageFromRabbitMQ
+  partial class CompanyMessageSending
   {
     public string message_id { get; set; }
     
@@ -158,52 +218,24 @@ namespace aeon.Integration1C.Structures.Module
     
     public string event_name { get; set; }
     
-    public aeon.Integration1C.Structures.Module.ResultUpdateEntityFrom1C body { get; set; }
+    public aeon.Integration1C.Structures.Module.CompanyDescriptionSending body { get; set; }
   }
   
   /// <summary>
-  /// Структура Json успешного создания/обновления сущности из 1С.
+  /// Структура Json отправляемых свойств Организации.
   /// </summary>
-  partial class ResultUpdateEntityFrom1C
+  partial class CompanyDescriptionSending
   {
-    public int Id { get; set; }
+    public string TIN { get; set; }
     
-    public string Guid { get; set; }
+    public string TRRC { get; set; }
     
-    public bool Verification { get; set; }
-    
-    public string ErrorText { get; set; }
-  }
-
-  /// <summary>
-  /// Структура сообщения ошибки создания/обновления сущности из 1С.
-  /// </summary>
-  partial class ErrorMesageFromRabbitMQ
-  {
-    public string message_id { get; set; }
-    
-    public string message_date { get; set; }
-    
-    public string correlation_id { get; set; }
-    
-    public string event_name { get; set; }
-    
-    public aeon.Integration1C.Structures.Module.ErrorUpdateEntityFrom1C body { get; set; }
-  }
-  
-  /// <summary>
-  /// Структура Json ошибки создания/обновления сущности из 1С.
-  /// </summary>
-  partial class ErrorUpdateEntityFrom1C
-  {
-    public bool Verification { get; set; }
-    
-    public string ErrorText { get; set; }
+    public string Id { get; set; }
   }
   
   #endregion
 
-  #region Получение КА из 1С.
+  #region Получение Организации из 1С.
   
   /// <summary>
   /// Структура сообщения получения Организации.
@@ -273,38 +305,6 @@ namespace aeon.Integration1C.Structures.Module
     public string CountryCode { get; set; }
     
     public bool Label { get; set; }
-    
-    public string Id { get; set; }
-  }
-  
-  #endregion
-
-  #region Отправка КА в 1С.
-  
-  /// <summary>
-  /// Структура сообщения отправки Организации.
-  /// </summary>
-  partial class CompanyMessageSending
-  {
-    public string message_id { get; set; }
-    
-    public string message_date { get; set; }
-    
-    public string correlation_id { get; set; }
-    
-    public string event_name { get; set; }
-    
-    public aeon.Integration1C.Structures.Module.CompanyDescriptionSending body { get; set; }
-  }
-  
-  /// <summary>
-  /// Структура Json отправляемых свойств Организации.
-  /// </summary>
-  partial class CompanyDescriptionSending
-  {
-    public string TIN { get; set; }
-    
-    public string TRRC { get; set; }
     
     public string Id { get; set; }
   }
