@@ -30,7 +30,7 @@
     {
       "NameGuid": "688ad37e-57a2-46f0-9d50-081fbd6286ab",
       "Name": "UpdateContractualDoc",
-      "DelayPeriod": 15,
+      "DelayPeriod": 5,
       "DelayStrategy": "RegularDelayStrategy",
       "IsHandlerGenerated": true,
       "Parameters": [
@@ -59,7 +59,7 @@
     {
       "NameGuid": "650514c0-c1ff-47ed-9e6a-851e4f290ff4",
       "Name": "UpdateCompany",
-      "DelayPeriod": 15,
+      "DelayPeriod": 5,
       "DelayStrategy": "RegularDelayStrategy",
       "IsHandlerGenerated": true,
       "Parameters": [
@@ -219,7 +219,7 @@
   "SharedAssemblyName": "aeon.Integration1C.Shared",
   "SharedNamespace": "aeon.Integration1C.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.35",
+  "Version": "0.0.1.38",
   "Widgets": [],
   "Versions": [
     {

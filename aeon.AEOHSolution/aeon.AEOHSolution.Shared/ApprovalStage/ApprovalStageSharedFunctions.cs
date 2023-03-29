@@ -29,5 +29,16 @@ namespace aeon.AEOHSolution.Shared
 
       return baseRoles;
     }
+    
+    /// <summary>
+    /// Установить видимость свойств.
+    /// </summary>
+    public override void SetPropertiesVisibility()
+    {
+      base.SetPropertiesAvailability();
+      
+      var isApprovers = _obj.StageType == StageType.Approvers;
+      _obj.State.Properties.SkipRenegotiation.IsVisible = isApprovers;
+    }
   }
 }

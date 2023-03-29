@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -7,4 +7,14 @@ using aeon.AEOHSolution.ApprovalStage;
 
 namespace aeon.AEOHSolution
 {
+  partial class ApprovalStageServerHandlers
+  {
+
+    public override void Created(Sungero.Domain.CreatedEventArgs e)
+    {
+      base.Created(e);
+      _obj.SkipRenegotiation = false;
+    }
+  }
+
 }
