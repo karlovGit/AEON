@@ -46,6 +46,16 @@
           "NameGuid": "d0e0d503-33ad-4961-b28b-f751ced0e1db",
           "Name": "ManagersInit",
           "Code": "ManagersInit"
+        },
+        {
+          "NameGuid": "8c770dc5-86d3-4918-b8b7-62e831ec7e8b",
+          "Name": "ActualSignatory",
+          "Code": "ActualSignatory"
+        },
+        {
+          "NameGuid": "06c28fc2-bb14-495d-b441-593741bc73d1",
+          "Name": "HeadOfNOR",
+          "Code": "HeadOfNOR"
         }
       ],
       "IsAncestorMetadata": true,

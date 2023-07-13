@@ -129,4 +129,10 @@
   <data name="Enum_Type_ManagersInit" xml:space="preserve">
     <value>Supervisory approval (multiple)</value>
   </data>
+  <data name="Enum_Type_ActualSignatory" xml:space="preserve">
+    <value>Actual signatory</value>
+  </data>
+  <data name="Enum_Type_HeadOfNOR" xml:space="preserve">
+    <value>Head of NOR</value>
+  </data>
 </root>

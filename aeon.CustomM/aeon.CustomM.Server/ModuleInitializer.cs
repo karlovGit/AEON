@@ -18,6 +18,8 @@ namespace aeon.CustomM.Server
       CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.CompanyBAccount, "Бухгалтер компании Б");
       CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.ManagerInit, "Согласование с вышестоящим руководителем");
       CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.ManagersInit, "Согласование с вышестоящим руководителем (множественное)");
+      CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.ActualSignatory, "Фактический подписант");
+      CreateApprovalRole(aeon.CustomM.CustomApprovalRole.Type.HeadOfNOR, "Руководитель НОР");
     }
     
     /// <summary>
@@ -27,7 +29,14 @@ namespace aeon.CustomM.Server
     {
       InitializationLogger.Debug("Init: Create Default Roles");
       
-      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(aeon.CustomM.Resources.ChiefAccountantsOurOrgsName, aeon.CustomM.Resources.ChiefAccountantsOurOrgsName, Constants.Module.ChiefAccountantsOurOrgs);
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(aeon.CustomM.Resources.ChiefAccountantsOurOrgsName,
+                                                                      aeon.CustomM.Resources.ChiefAccountantsOurOrgsName,
+                                                                      Constants.Module.ChiefAccountantsOurOrgs);
+      
+      // Исключения из Согласование с вышестоящим руководителем (множественное).
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(aeon.CustomM.Resources.ExceptionsToSupervisoryRole,
+                                                                      aeon.CustomM.Resources.DescriptionExceptionsToSupervisoryRole,
+                                                                      Constants.Module.ExceptionsToSupervisory);
     }
     
     /// <summary>

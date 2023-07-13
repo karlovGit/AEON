@@ -16,6 +16,7 @@ namespace aeon.AEOHSolution
       
       var currentUser = Users.Current;
       _obj.State.Properties.Guid1C.IsEnabled = currentUser.IncludedIn(Roles.Administrators) || currentUser.IncludedIn(aeon.Integration1C.PublicConstants.Module.ResponsibleForIntegration1CRoleGuid);
+      _obj.State.Properties.ResponsibleEmployee.IsRequired = true;
     }
 
   }

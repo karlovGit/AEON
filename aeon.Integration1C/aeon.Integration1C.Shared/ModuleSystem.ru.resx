@@ -180,4 +180,28 @@
   <data name="JobDisplayName_eb6c3016391146d9b70a0a53a2c40409" xml:space="preserve">
     <value>Интеграция. Получение Организаций из 1С</value>
   </data>
+  <data name="JobDisplayName_d355e3fe4acc4e1d9615a344e195fa8f" xml:space="preserve">
+    <value>Интеграция. Получение формализованных документов из 1С</value>
+  </data>
+  <data name="JobDescription_d355e3fe4acc4e1d9615a344e195fa8f" xml:space="preserve">
+    <value>Получение новых или измененных формализованных документов из 1С: Бухгалтерия.</value>
+  </data>
+  <data name="AsyncHandler_Description_af298b236cb74404ab5162ed36a0062c" xml:space="preserve">
+    <value>Обновить формализованный документ</value>
+  </data>
+  <data name="AsyncHandler_Description_76a6ebda7a634b338bc6cf014dc2e056" xml:space="preserve">
+    <value>Обновить неформализованный документ</value>
+  </data>
+  <data name="JobDescription_df6e62d5fde44090ad71c307de532995" xml:space="preserve">
+    <value>Получение новых или измененных неформализованных документов из 1С: Бухгалтерия.</value>
+  </data>
+  <data name="JobDisplayName_df6e62d5fde44090ad71c307de532995" xml:space="preserve">
+    <value>Интеграция. Получение неформализованных документов из 1С</value>
+  </data>
+  <data name="JobDisplayName_c20dca7d97ae43dc8856c1c19aabaa66" xml:space="preserve">
+    <value>Интеграция. Отправка финансовых документов на согласование по регламенту</value>
+  </data>
+  <data name="JobDescription_c20dca7d97ae43dc8856c1c19aabaa66" xml:space="preserve">
+    <value>Отправка финансовых документов на согласование по регламенту</value>
+  </data>
 </root>

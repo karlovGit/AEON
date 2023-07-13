@@ -129,4 +129,10 @@
   <data name="Enum_Type_ManagersInit" xml:space="preserve">
     <value>Согласование с вышестоящим руководителем (множественное)</value>
   </data>
+  <data name="Enum_Type_ActualSignatory" xml:space="preserve">
+    <value>Фактический подписант</value>
+  </data>
+  <data name="Enum_Type_HeadOfNOR" xml:space="preserve">
+    <value>Руководитель НОР</value>
+  </data>
 </root>

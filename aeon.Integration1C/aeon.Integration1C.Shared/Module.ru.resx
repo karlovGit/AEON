@@ -147,4 +147,13 @@
   <data name="SqlDateTimeException" xml:space="preserve">
     <value>SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.</value>
   </data>
+  <data name="NonFormalizedSimpleDocumentKindName" xml:space="preserve">
+    <value>Неформализованный финансовый документ</value>
+  </data>
+  <data name="AbortingReasonApprovalFinancialDocs" xml:space="preserve">
+    <value>Поступил новый пакет документов.</value>
+  </data>
+  <data name="TaskSubjectForManualSendingDocument" xml:space="preserve">
+    <value>Не удалось определить подписывающего. Отправьте документ на согласование вручную.</value>
+  </data>
 </root>

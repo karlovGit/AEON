@@ -180,4 +180,34 @@
   <data name="JobDescription_eb6c3016391146d9b70a0a53a2c40409" xml:space="preserve">
     <value>Getting new or changed companies to 1C: UH.</value>
   </data>
+  <data name="JobDisplayName_d355e3fe4acc4e1d9615a344e195fa8f" xml:space="preserve">
+    <value>Integration. Getting formalized documents in 1C</value>
+  </data>
+  <data name="JobDescription_d355e3fe4acc4e1d9615a344e195fa8f" xml:space="preserve">
+    <value>Getting new or changed formalized documents to 1C: Accounting.</value>
+  </data>
+  <data name="AsyncHandler_Description_af298b236cb74404ab5162ed36a0062c" xml:space="preserve">
+    <value>Update Formalized Document</value>
+  </data>
+  <data name="AsyncHandler_Description_76a6ebda7a634b338bc6cf014dc2e056" xml:space="preserve">
+    <value>Update Formalized Document</value>
+  </data>
+  <data name="JobDisplayName_df6e62d5fde44090ad71c307de532995" xml:space="preserve">
+    <value>Integration. Getting non-formalized documents in 1C</value>
+  </data>
+  <data name="JobDescription_df6e62d5fde44090ad71c307de532995" xml:space="preserve">
+    <value>Getting new or changed non-formalized documents to 1C: Accounting.</value>
+  </data>
+  <data name="JobDisplayName_c20dca7d97ae43dc8856c1c19aabaa66" xml:space="preserve">
+    <value>Integration. Sending financial documents for approval task</value>
+  </data>
+  <data name="JobDescription_c20dca7d97ae43dc8856c1c19aabaa66" xml:space="preserve">
+    <value>Sending financial documents for approval task</value>
+  </data>
+  <data name="CoverAction_OpenBodyDocument" xml:space="preserve">
+    <value>Open Body Document</value>
+  </data>
+  <data name="CoverDescription_OpenBodyDocument" xml:space="preserve">
+    <value />
+  </data>
 </root>

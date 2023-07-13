@@ -7,6 +7,120 @@ using Sungero.CoreEntities;
 namespace aeon.Integration1C.Structures.Module
 {
 
+  #region Результаты успешного создания Финансовых документов.
+  
+  /// <summary>
+  /// Структура сообщения успешного создания документа из 1С.
+  /// </summary>
+  partial class ResultMesageFinancialDocFromRabbitMQ
+  {
+    public string message_id { get; set; }
+    
+    public string message_date { get; set; }
+    
+    public string correlation_id { get; set; }
+    
+    public string event_name { get; set; }
+    
+    public aeon.Integration1C.Structures.Module.ResultUpdateFinancialDocFrom1C body { get; set; }
+  }
+  
+  /// <summary>
+  /// Структура Json успешного создания документа из 1С.
+  /// </summary>
+  partial class ResultUpdateFinancialDocFrom1C
+  {
+    public int Id { get; set; }
+        
+    public bool Verification { get; set; }
+    
+    public string ErrorText { get; set; }
+  }
+  
+  #endregion
+  
+  #region Получение Неформализованных документов из 1С.
+  
+  /// <summary>
+  /// Структура сообщения получения Неформализованного документа.
+  /// </summary>
+  partial class NonFormalizedDocMessageGetting
+  {
+    public string message_id { get; set; }
+    
+    public string message_date { get; set; }
+    
+    public string correlation_id { get; set; }
+    
+    public string event_name { get; set; }
+    
+    public aeon.Integration1C.Structures.Module.NonFormalizedDocDescriptionGetting body { get; set; }
+  }
+  
+  /// <summary>
+  /// Структура Json принимаемых свойств Неформализованного документа.
+  /// </summary>
+  partial class NonFormalizedDocDescriptionGetting
+  {
+    public string PacketGUID { get; set; }
+    
+    public string Name { get; set; }
+    
+    public string DocumentBody { get; set; }
+  }
+  
+  #endregion
+
+  #region Получение Формализованных документов из 1С.
+  
+  /// <summary>
+  /// Структура сообщения получения Формализованного документа.
+  /// </summary>
+  partial class FormalizedDocMessageGetting
+  {
+    public string message_id { get; set; }
+    
+    public string message_date { get; set; }
+    
+    public string correlation_id { get; set; }
+    
+    public string event_name { get; set; }
+    
+    public aeon.Integration1C.Structures.Module.FormalizedDocDescriptionGetting body { get; set; }
+  }
+  
+  /// <summary>
+  /// Структура Json принимаемых свойств Формализованного документа.
+  /// </summary>
+  partial class FormalizedDocDescriptionGetting
+  {
+    public string PacketGUID { get; set; }
+    
+    public string DocumentType { get; set; }
+    
+    public int? TotalCountDocument { get; set;}
+    
+    public string GUID { get; set; }
+    
+    public string Contract { get; set; }
+    
+    public string BusinessUnitINN { get; set; }
+    
+    public string BusinessUnitKPP { get; set; }
+    
+    public double? TotalAmount { get; set; }
+    
+    public string RegistrationNumber { get; set; }
+    
+    public string RegistrationDate { get; set; }
+    
+    public string Currency { get; set; }
+    
+    public string DocumentBody { get; set; }
+  }
+  
+  #endregion
+
   #region Результаты интеграции.
   
   /// <summary>

@@ -117,4 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Property_Guid1C" xml:space="preserve">
+    <value>Guid</value>
+  </data>
+  <data name="Property_PackageGuid" xml:space="preserve">
+    <value>Package documents Id</value>
+  </data>
+  <data name="ControlGroup_a549655787f44e62a0975a9e48878e5c" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="Resource_663e0da98eea4663bf13eb5b251af0ff" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_663e0da98eea4663bf13eb5b251af0ff_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_2a8bbf7c7ca24f389d523c6db95cc913" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2a8bbf7c7ca24f389d523c6db95cc913_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_e83c871ffafc4e8583a3d4de56dee9a8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_e83c871ffafc4e8583a3d4de56dee9a8_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_51f9d51559f74999bb6187796e7a87cb" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Resource_311b3af5835b4b69b04be13955327407" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_311b3af5835b4b69b04be13955327407_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_1da57f37cb124bf3ab4ad338fd62897c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_1da57f37cb124bf3ab4ad338fd62897c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_cd9dfbd5c58a44dea1291bd68d0de6d9" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_cd9dfbd5c58a44dea1291bd68d0de6d9_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_86bc6ac8f1014c25b56262751b8e5223" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="Resource_c0c854dd53074637befaf884af877f6d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7af90172fc104a3b8d9fa9fecded6c2e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_7af90172fc104a3b8d9fa9fecded6c2e_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_2fa77396054c46798e136986751192fb" xml:space="preserve">
+    <value>Guid 1C</value>
+  </data>
+  <data name="Property_NumberOfDocumentsInPackage" xml:space="preserve">
+    <value>Number of documents in a package</value>
+  </data>
 </root>

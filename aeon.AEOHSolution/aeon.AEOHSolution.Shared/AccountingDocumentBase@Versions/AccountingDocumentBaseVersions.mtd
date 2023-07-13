@@ -1,6 +1,6 @@
 {
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
-  "NameGuid": "e1625270-f68e-461c-b9dc-d7913824e060",
+  "NameGuid": "fc67848a-0689-45b9-a561-8d07572e0c0c",
   "Name": "AccountingDocumentBaseVersions",
   "AccessRightsMode": "NoRight",
   "BaseGuid": "fd8ac5de-440e-451f-9d12-0213f4fd59ba",
@@ -26,7 +26,7 @@
       "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
       "NameGuid": "9db5ead2-a918-4f50-8aa4-f75a44cfce07",
       "Name": "ElectronicDocument",
-      "EntityGuid": "a790b8d5-bb16-4c40-b59d-764087509904",
+      "EntityGuid": "dcba346e-d976-4a8a-afe3-c1587c0e6bd8",
       "IsAncestorMetadata": true,
       "IsReferenceToRootEntity": true,
       "Overridden": [

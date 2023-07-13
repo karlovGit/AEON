@@ -128,6 +128,32 @@
           "RowNumber": 1,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "890e0256-2b2a-4f07-9b86-f10499d8de46",
+          "Name": "ChangeSequence",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "ee6445fd-4d53-4c43-a1bd-e7edf2d737b8",
+          "PropertyGuid": "edba2a5b-5399-4a7c-b731-ccaa163bc12d",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "2168a10b-138d-4825-a0f2-c325cd1f81d9",
+          "Name": "NotifyAboutRevision",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "ee6445fd-4d53-4c43-a1bd-e7edf2d737b8",
+          "PropertyGuid": "313948c6-e19e-4681-af04-06e0249bb273",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -171,6 +197,22 @@
       "Code": "SkipRenegotiat",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "e6338f48-a30d-4fa4-ae5b-de8e17c808d5"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "edba2a5b-5399-4a7c-b731-ccaa163bc12d",
+      "Name": "ChangeSequence",
+      "Code": "ChangeSequence",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "7c8a34a4-4f99-4326-b1d5-bad68f0be73c"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "313948c6-e19e-4681-af04-06e0249bb273",
+      "Name": "NotifyApprovers",
+      "Code": "NotifyApprover",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "edba2a5b-5399-4a7c-b731-ccaa163bc12d"
     }
   ],
   "PublicFunctions": [

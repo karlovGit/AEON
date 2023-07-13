@@ -129,7 +129,7 @@
   <data name="CollectionDisplayName" xml:space="preserve">
     <value>Настройки интеграции</value>
   </data>
-  <data name="Property_ExchangePoint" xml:space="preserve">
+  <data name="Property_ExchangePointHM" xml:space="preserve">
     <value>Точка обмена RabbitMQ</value>
   </data>
   <data name="Property_QueueGetForCounterparties" xml:space="preserve">
@@ -162,7 +162,7 @@
   <data name="Property_VirtualHost" xml:space="preserve">
     <value>Виртуальный хост</value>
   </data>
-  <data name="Property_QueueSendForVerification" xml:space="preserve">
+  <data name="Property_QueueSendForVerificationHM" xml:space="preserve">
     <value>Очередь для результатов отправки</value>
   </data>
   <data name="Property_RoutingKeySendCounterparties" xml:space="preserve">
@@ -186,16 +186,16 @@
   <data name="Property_QueueSendForContracts" xml:space="preserve">
     <value>Очередь для договоров</value>
   </data>
-  <data name="Property_RoutingKeySendVerification" xml:space="preserve">
+  <data name="Property_RoutingKeySendVerificationHM" xml:space="preserve">
     <value>Ключ для результатов отправки</value>
   </data>
   <data name="Property_QueueGetForVerification" xml:space="preserve">
     <value>Очередь для результатов получения</value>
   </data>
-  <data name="Property_QueueErrors" xml:space="preserve">
+  <data name="Property_QueueErrorsHM" xml:space="preserve">
     <value>Очередь для ошибок</value>
   </data>
-  <data name="Property_RoutingKeyErrors" xml:space="preserve">
+  <data name="Property_RoutingKeyErrorsHM" xml:space="preserve">
     <value>Ключ для ошибок</value>
   </data>
   <data name="Property_ContractResponsible" xml:space="preserve">
@@ -206,5 +206,41 @@
   </data>
   <data name="Property_ContractsAccount" xml:space="preserve">
     <value>Договоры-счета</value>
+  </data>
+  <data name="Property_QueueGetForFormalizedDocs" xml:space="preserve">
+    <value>Очередь для формализованных документов</value>
+  </data>
+  <data name="Property_QueueGetForNonFormalizedDocs" xml:space="preserve">
+    <value>Очередь для неформализованных документов</value>
+  </data>
+  <data name="Property_IntragroupDocuments" xml:space="preserve">
+    <value>Внутригрупповые документы</value>
+  </data>
+  <data name="Property_ExternalWithResidentDocuments" xml:space="preserve">
+    <value>Документы внешние с резидентом</value>
+  </data>
+  <data name="Property_ExternalWithNonResidentDocuments" xml:space="preserve">
+    <value>Документы внешние с нерезидентом</value>
+  </data>
+  <data name="Property_ExchangePointABU" xml:space="preserve">
+    <value>Точка обмена RabbitMQ</value>
+  </data>
+  <data name="ControlGroup_a7493be0e1c840858b1a2109aa3dd6f6" xml:space="preserve">
+    <value>1С: УХ</value>
+  </data>
+  <data name="ControlGroup_6dafaf1be9424dadb7b8b3d0c79f5c25" xml:space="preserve">
+    <value>1С: БП</value>
+  </data>
+  <data name="Property_QueueErrorsABU" xml:space="preserve">
+    <value>Очередь для ошибок</value>
+  </data>
+  <data name="Property_RoutingKeyErrorsABU" xml:space="preserve">
+    <value>Ключ для ошибок</value>
+  </data>
+  <data name="Property_QueueSendForVerificatioABU" xml:space="preserve">
+    <value>Очередь для результатов отправки</value>
+  </data>
+  <data name="Property_RoutingKeySendVerificationABU" xml:space="preserve">
+    <value>Ключ для результатов отправки</value>
   </data>
 </root>

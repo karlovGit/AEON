@@ -15,15 +15,9 @@ namespace aeon.CustomM.Server
       if (_obj.Type == aeon.CustomM.CustomApprovalRole.Type.CompanyAAccount)
       {
         var document = task.DocumentGroup.OfficialDocuments.FirstOrDefault();
-        
-        var contractualDocument = Sungero.Contracts.ContractualDocuments.As(document);
-        var contractStatement = Sungero.FinancialArchive.ContractStatements.As(document);
-        
-        var businessUnit = contractualDocument != null ? contractualDocument.BusinessUnit :
-          (contractStatement != null ? contractStatement.BusinessUnit : null);
-        
-        if (businessUnit != null )
-          return aeon.AEOHSolution.BusinessUnits.As(businessUnit).ChiefAccountant;
+
+        if (document != null )
+          return aeon.AEOHSolution.BusinessUnits.As(document.BusinessUnit).ChiefAccountant;
         
         return null;
       }
@@ -55,6 +49,28 @@ namespace aeon.CustomM.Server
       {
         var department = GetDepartment(task.Author);
         return GetDepartmentManager(department);
+      }
+      
+      // Фактический подписант.
+      if (_obj.Type == aeon.CustomM.CustomApprovalRole.Type.ActualSignatory)
+      {
+        var document = task.DocumentGroup.OfficialDocuments.FirstOrDefault();
+        
+        if (document.BusinessUnit != null)
+          return aeon.AEOHSolution.BusinessUnits.As(document.BusinessUnit).ActualSignatory;
+        
+        return null;
+      }
+      
+      // Руководитель НОР.
+      if (_obj.Type == aeon.CustomM.CustomApprovalRole.Type.HeadOfNOR)
+      {
+        var document = task.DocumentGroup.OfficialDocuments.FirstOrDefault();
+        
+        if (document.BusinessUnit != null)
+          return document.BusinessUnit.CEO;
+        
+        return null;
       }
       
       return base.GetRolePerformer(task);
@@ -92,7 +108,8 @@ namespace aeon.CustomM.Server
         
         if (firstManager != null)
         {
-          result = GetDepartmentManagers(department, result);
+          var role = Roles.GetAll().FirstOrDefault(x => x.Sid == Constants.Module.ExceptionsToSupervisory);
+          result = GetDepartmentManagers(department, result, role);
           result.Remove(firstManager);
         }
       }
@@ -113,17 +130,25 @@ namespace aeon.CustomM.Server
     /// <summary>
     /// Получить руководителя подразделения инициатора согласования.
     /// </summary>
-    /// <param name="task">Задача.</param>
-    /// <returns>Сотрудник.</returns>
-    private List<Sungero.CoreEntities.IRecipient> GetDepartmentManagers(Sungero.Company.IDepartment department, List<Sungero.CoreEntities.IRecipient> result)
+    /// <param name="department">Подразделение.</param>
+    /// <param name="result">результат(список руководителей).</param>
+    /// <param name="role">Роль для исключения из резальтата.</param>
+    /// <returns>Список руководителей.</returns>
+    private List<Sungero.CoreEntities.IRecipient> GetDepartmentManagers(Sungero.Company.IDepartment department, List<Sungero.CoreEntities.IRecipient> result, IRole role)
     {
       if (department == null)
         return result;
       
       if (department.Manager != null)
-        result.Add(department.Manager);
+      {
+        if (role != null && !department.Manager.IncludedIn(role))
+          result.Add(department.Manager);
+        
+        if (role == null)
+          result.Add(department.Manager);
+      }
       
-      return GetDepartmentManagers(department.HeadOffice, result);
+      return GetDepartmentManagers(department.HeadOffice, result, role);
     }
     
   }

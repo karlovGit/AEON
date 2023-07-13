@@ -258,4 +258,10 @@
   <data name="Resource_4be2fe98ffe14cae9fb8272c672acf11" xml:space="preserve">
     <value />
   </data>
+  <data name="Property_ActualSignatory" xml:space="preserve">
+    <value>Фактический подписант</value>
+  </data>
+  <data name="Property_LeaderInvolvedNegotiation" xml:space="preserve">
+    <value>Руководитель участвует в согласовании</value>
+  </data>
 </root>

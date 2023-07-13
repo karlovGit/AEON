@@ -129,7 +129,7 @@
   <data name="CollectionDisplayName" xml:space="preserve">
     <value>Settings integration</value>
   </data>
-  <data name="Property_ExchangePoint" xml:space="preserve">
+  <data name="Property_ExchangePointHM" xml:space="preserve">
     <value>RabbitMQ exchange point</value>
   </data>
   <data name="Property_QueueGetForCounterparties" xml:space="preserve">
@@ -168,7 +168,7 @@
   <data name="Property_VirtualHost" xml:space="preserve">
     <value>Virtual Host</value>
   </data>
-  <data name="Property_QueueSendForVerification" xml:space="preserve">
+  <data name="Property_QueueSendForVerificationHM" xml:space="preserve">
     <value>Queue for integration sending</value>
   </data>
   <data name="Property_RoutingKeySendCounterparties" xml:space="preserve">
@@ -192,16 +192,16 @@
   <data name="Property_QueueSendForContracts" xml:space="preserve">
     <value>Queue for contracts</value>
   </data>
-  <data name="Property_RoutingKeySendVerification" xml:space="preserve">
+  <data name="Property_RoutingKeySendVerificationHM" xml:space="preserve">
     <value>Routing Key for integration sending</value>
   </data>
   <data name="Property_QueueGetForVerification" xml:space="preserve">
     <value>Queue for integration getting</value>
   </data>
-  <data name="Property_QueueErrors" xml:space="preserve">
+  <data name="Property_QueueErrorsHM" xml:space="preserve">
     <value>Queue for errors</value>
   </data>
-  <data name="Property_RoutingKeyErrors" xml:space="preserve">
+  <data name="Property_RoutingKeyErrorsHM" xml:space="preserve">
     <value>Routing Key for errors</value>
   </data>
   <data name="Property_ContractResponsible" xml:space="preserve">
@@ -212,5 +212,41 @@
   </data>
   <data name="Property_ContractsAccount" xml:space="preserve">
     <value>Contracts account</value>
+  </data>
+  <data name="Property_QueueGetForFormalizedDocs" xml:space="preserve">
+    <value>Queue for formalized documents</value>
+  </data>
+  <data name="Property_QueueGetForNonFormalizedDocs" xml:space="preserve">
+    <value>Queue for non-formalized documents</value>
+  </data>
+  <data name="Property_IntragroupDocuments" xml:space="preserve">
+    <value>Intragroup documents</value>
+  </data>
+  <data name="Property_ExternalWithResidentDocuments" xml:space="preserve">
+    <value>Documents external with a resident</value>
+  </data>
+  <data name="Property_ExternalWithNonResidentDocuments" xml:space="preserve">
+    <value>Documents external with a resident</value>
+  </data>
+  <data name="Property_ExchangePointABU" xml:space="preserve">
+    <value>RabbitMQ exchange point</value>
+  </data>
+  <data name="ControlGroup_a7493be0e1c840858b1a2109aa3dd6f6" xml:space="preserve">
+    <value>1C: HM</value>
+  </data>
+  <data name="ControlGroup_6dafaf1be9424dadb7b8b3d0c79f5c25" xml:space="preserve">
+    <value>1C: ABU</value>
+  </data>
+  <data name="Property_QueueErrorsABU" xml:space="preserve">
+    <value>Queue for errors</value>
+  </data>
+  <data name="Property_RoutingKeyErrorsABU" xml:space="preserve">
+    <value>Routing Key for errors</value>
+  </data>
+  <data name="Property_QueueSendForVerificatioABU" xml:space="preserve">
+    <value>Queue for integration sending</value>
+  </data>
+  <data name="Property_RoutingKeySendVerificationABU" xml:space="preserve">
+    <value>Routing Key for integration sending</value>
   </data>
 </root>

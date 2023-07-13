@@ -121,7 +121,10 @@
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DocumentSentRevision",
+    "DocAgreed"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "28a11f70-7634-4536-b101-4d96e575044d",
     "Name": "RibbonCard",

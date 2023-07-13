@@ -3,14 +3,297 @@ using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using Sungero.FormalizeDocumentsParser;
 
 namespace aeon.Integration1C.Server
 {
   public class ModuleAsyncHandlers
   {
 
+    public virtual void UpdateNonFormalizedDoc(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.UpdateNonFormalizedDocInvokeArgs args)
+    {
+      if (args.RetryIteration > 50)
+      {
+        args.Retry = false;
+        return;
+      }
+      
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
+      var routingKeyVerification = setting.RoutingKeySendVerificationABU;
+      var routingKeyError = setting.RoutingKeyErrorsABU;
+      var exchangePoint = setting.ExchangePointABU;
+      var queueErrors = setting.QueueErrorsABU;
+      
+      var result = Functions.Module.DeserializeMessageFromNonFormalizedDoc(args.Message);
+      var resultBody = result.body;
+      if (string.IsNullOrEmpty(resultBody.PacketGUID))
+        return;
+      
+      var nonFormalizedDoc = AEOHSolution.SimpleDocuments.Create();
+      try
+      {
+        if (Locks.TryLock(nonFormalizedDoc))
+        {
+          var docKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(Constants.Module.NonFormalizedSimpleDocumentKind);
+          nonFormalizedDoc.DocumentKind = docKind;
+          nonFormalizedDoc.PackageGuid = resultBody.PacketGUID;
+          nonFormalizedDoc.Name = resultBody.Name;
+          
+          Functions.Module.CreateVersionFromBase64String(nonFormalizedDoc, resultBody.DocumentBody, Constants.Module.PdfExtension);
+          
+          var formalizedDoc = Functions.Module.GetLeadingDocument(resultBody.PacketGUID);
+          if (formalizedDoc != null)
+          {
+            if (!formalizedDoc.Relations.GetRelatedFrom().Any(r => Equals(r, nonFormalizedDoc)))
+            {
+              nonFormalizedDoc.Relations.AddFrom(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, formalizedDoc);
+              nonFormalizedDoc.Save();
+            }
+          }
+          
+          if (Locks.GetLockInfo(nonFormalizedDoc).IsLocked)
+            Locks.Unlock(nonFormalizedDoc);
+          
+          var messageResult = Functions.Module.SerializeMessageFinancialDocFromResult(nonFormalizedDoc.Id, result.correlation_id);
+          Functions.Module.SendMessageFromRabbitMQ(messageResult, routingKeyVerification, exchangePoint);
+        }
+        else
+        {
+          args.Retry = true;
+          return;
+        }
+      }
+      catch (Exception ex)
+      {
+        Logger.Error(ex.Message, ex);
+        if (Locks.GetLockInfo(nonFormalizedDoc).IsLocked)
+          Locks.Unlock(nonFormalizedDoc);
+        
+        var messageError = Functions.Module.SerializeMessageFromError(ex.Message, result.correlation_id, queueErrors);
+        Functions.Module.SendMessageFromRabbitMQ(messageError, routingKeyError, exchangePoint);
+      }
+    }
+
+    public virtual void UpdateFormalizedDoc(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.UpdateFormalizedDocInvokeArgs args)
+    {
+      if (args.RetryIteration > 50)
+      {
+        args.Retry = false;
+        return;
+      }
+      
+      var setting = Functions.SettingsIntegration.GetSettingsIntegration();
+      var routingKeyVerification = setting.RoutingKeySendVerificationABU;
+      var routingKeyError = setting.RoutingKeyErrorsABU;
+      var exchangePoint = setting.ExchangePointABU;
+      var queueErrors = setting.QueueErrorsABU;
+      
+      var result = Functions.Module.DeserializeMessageFromFormalizedDoc(args.Message);
+      var resultBody = result.body;
+      
+      var formalizedDoc = AEOHSolution.AccountingDocumentBases.Null;
+      
+      var isContractStatement = resultBody.DocumentType == Constants.Module.FormalizedDocType.ActType;
+      var isUtd = resultBody.DocumentType == Constants.Module.FormalizedDocType.UTDType;
+      var isInvoice = resultBody.DocumentType == Constants.Module.FormalizedDocType.InvoiceType;
+      
+      if (isContractStatement)
+        formalizedDoc = Sungero.FinancialArchive.ContractStatements.Create();
+      else if (isInvoice)
+        formalizedDoc = Sungero.FinancialArchive.OutgoingTaxInvoices.Create();
+      else if (isUtd)
+        formalizedDoc = Sungero.FinancialArchive.UniversalTransferDocuments.Create();
+      
+      if (formalizedDoc == null)
+        return;
+      
+      try
+      {
+        // Проверить корректность дат.
+        var validateResult = Functions.Module.ValidateDate(resultBody.RegistrationDate);
+        if (validateResult != string.Empty)
+          throw new Exception(validateResult);
+        
+        if (Locks.TryLock(formalizedDoc))
+        {
+          
+          #region Обновление свойств Формализованного документа.
+          
+          formalizedDoc.PackageGuid = resultBody.PacketGUID;
+          formalizedDoc.NumberOfDocumentsInPackage = resultBody.TotalCountDocument;
+          
+          if (!string.IsNullOrEmpty(resultBody.Contract))
+          {
+            var leadingDocument = AEOHSolution.ContractualDocuments.GetAll(c => c.Guid1C == resultBody.Contract).FirstOrDefault();
+            if (leadingDocument != null)
+            {
+              formalizedDoc.LeadingDocument = leadingDocument;
+              
+              #region Подстановка Вида документа.
+              
+              var counterparty = Sungero.Parties.Companies.As(leadingDocument.Counterparty);
+              if (counterparty != null)
+              {
+                // Контрагент является копией Нашей организации.
+                if (counterparty.IsCardReadOnly.GetValueOrDefault())
+                {
+                  var kinds = setting.IntragroupDocuments.Where(k => k.DocumentKind != null && k.DocumentKind.DocumentType != null);
+                  if (isContractStatement)
+                    formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Constants.Module.FormalizedDocTypeGuids.ContractStatementInvoiceGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                  else if (isInvoice)
+                    formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Sungero.Docflow.PublicConstants.AccountingDocumentBase.OutcomingTaxInvoiceGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                  else if (isUtd)
+                    formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Constants.Module.FormalizedDocTypeGuids.UniversalTransferDocumentGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                }
+                else
+                {
+                  // Контрагент Резидент.
+                  if (!counterparty.Nonresident.GetValueOrDefault())
+                  {
+                    var kinds = setting.ExternalWithResidentDocuments.Where(k => k.DocumentKind != null && k.DocumentKind.DocumentType != null);
+                    if (isContractStatement)
+                      formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Constants.Module.FormalizedDocTypeGuids.ContractStatementInvoiceGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                    else if (isInvoice)
+                      formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Sungero.Docflow.PublicConstants.AccountingDocumentBase.OutcomingTaxInvoiceGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                    else if (isUtd)
+                      formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Constants.Module.FormalizedDocTypeGuids.UniversalTransferDocumentGuid).Select(k => k.DocumentKind).FirstOrDefault();
+
+                  }
+                  // Контрагент Нерезидент.
+                  else
+                  {
+                    var kinds = setting.ExternalWithNonResidentDocuments.Where(k => k.DocumentKind != null && k.DocumentKind.DocumentType != null);
+                    if (isContractStatement)
+                      formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Constants.Module.FormalizedDocTypeGuids.ContractStatementInvoiceGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                    else if (isInvoice)
+                      formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Sungero.Docflow.PublicConstants.AccountingDocumentBase.OutcomingTaxInvoiceGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                    else if (isUtd)
+                      formalizedDoc.DocumentKind = kinds.Where(k => k.DocumentKind.DocumentType.DocumentTypeGuid == Constants.Module.FormalizedDocTypeGuids.UniversalTransferDocumentGuid).Select(k => k.DocumentKind).FirstOrDefault();
+                  }
+                }
+              }
+              
+              #endregion
+
+            }
+          }
+          
+          var businessUnit = Functions.Module.GetBusinessUnitFromINNAndKPP(resultBody.BusinessUnitINN, resultBody.BusinessUnitKPP);
+          formalizedDoc.BusinessUnit = businessUnit;
+          if (businessUnit != null)
+          {
+            var businessUnitBox = Sungero.ExchangeCore.BusinessUnitBoxes.GetAll(b => Equals(b.BusinessUnit, businessUnit) && b.Status == Sungero.ExchangeCore.BusinessUnitBox.Status.Active).FirstOrDefault();
+            formalizedDoc.BusinessUnitBox = businessUnitBox;
+            
+            if (AEOHSolution.BusinessUnits.As(businessUnit).ChiefAccountant != null)
+            {
+              formalizedDoc.ResponsibleEmployee = AEOHSolution.BusinessUnits.As(businessUnit).ChiefAccountant;
+              formalizedDoc.Department = AEOHSolution.BusinessUnits.As(businessUnit).ChiefAccountant.Department;
+            }
+          }
+          
+          formalizedDoc.TotalAmount = resultBody.TotalAmount;
+          formalizedDoc.RegistrationNumber = resultBody.RegistrationNumber;
+          
+          if (!string.IsNullOrEmpty(resultBody.RegistrationDate))
+            formalizedDoc.RegistrationDate = DateTime.Parse(resultBody.RegistrationDate);
+
+          formalizedDoc.Currency = Functions.Module.GetCurrencyFromCode(resultBody.Currency);
+          formalizedDoc.Guid1C = resultBody.GUID;
+          
+          if (isContractStatement)
+            formalizedDoc.FormalizedServiceType = Sungero.Docflow.AccountingDocumentBase.FormalizedServiceType.Act;
+          else if (isInvoice)
+            formalizedDoc.FormalizedServiceType = Sungero.Docflow.AccountingDocumentBase.FormalizedServiceType.Invoice;
+          else
+            formalizedDoc.FormalizedServiceType = Sungero.Docflow.AccountingDocumentBase.FormalizedServiceType.GeneralTransfer;
+          
+          #endregion
+          
+          Functions.Module.CreateVersionFormalizedDocFromBase64String(formalizedDoc, resultBody.DocumentBody, (isContractStatement || isUtd));
+          
+          // Заменить параметры ИНН_КПП на ИД организации из Диадок.
+          if (formalizedDoc != null && formalizedDoc.LastVersion != null)
+            Functions.Module.ReplaceXmlParams(formalizedDoc);
+
+          // Сделать существующий документ устаревшим.
+          var oldFormalizedDoc = AEOHSolution.AccountingDocumentBases.GetAll(d => d.Guid1C == resultBody.GUID && !Equals(d, formalizedDoc)).FirstOrDefault();
+          if (oldFormalizedDoc != null)
+          {
+            var locksRelations = oldFormalizedDoc.Relations.GetRelated().Where(r => Locks.GetLockInfo(r).IsLocked);
+            foreach (var relationsDocument in locksRelations)
+              Locks.Unlock(relationsDocument);
+            
+            if (Locks.GetLockInfo(oldFormalizedDoc).IsLocked)
+              Locks.Unlock(oldFormalizedDoc);
+            
+            Functions.Module.AbortApprovalTasks(oldFormalizedDoc);
+            Functions.Module.CancelesOldFormalizedDoc(oldFormalizedDoc);
+          }
+          
+          #region Связать документы из одного пакета.
+          
+          if (isContractStatement || isUtd)
+          {
+            var accountingDocuments = AEOHSolution.AccountingDocumentBases.GetAll(d => d.PackageGuid == resultBody.PacketGUID && !Equals(d, formalizedDoc));
+            var simpleDocuments = AEOHSolution.SimpleDocuments.GetAll(d => d.PackageGuid == resultBody.PacketGUID);
+            var relatedDocuments = new List<Sungero.Docflow.IOfficialDocument>();
+            relatedDocuments.AddRange(accountingDocuments);
+            relatedDocuments.AddRange(simpleDocuments);
+            foreach (var relatedDocument in relatedDocuments)
+            {
+              if (formalizedDoc.Relations.GetRelated().Any(r => Equals(r, relatedDocument)))
+                continue;
+              
+              formalizedDoc.Relations.Add(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, relatedDocument);
+            }
+            
+            if (relatedDocuments.Any())
+              formalizedDoc.Save();
+          }
+          else
+          {
+            var accountingDocument = Functions.Module.GetLeadingDocument(resultBody.PacketGUID);
+            if (accountingDocument != null)
+            {
+              formalizedDoc.Relations.AddFrom(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, accountingDocument);
+              formalizedDoc.Save();
+            }
+          }
+          
+          #endregion
+          
+          if (Locks.GetLockInfo(formalizedDoc).IsLocked)
+            Locks.Unlock(formalizedDoc);
+          
+          var messageResult = Functions.Module.SerializeMessageFinancialDocFromResult(formalizedDoc.Id, result.correlation_id);
+          Functions.Module.SendMessageFromRabbitMQ(messageResult, routingKeyVerification, exchangePoint);
+        }
+        else
+        {
+          args.Retry = true;
+          return;
+        }
+      }
+      catch (Exception ex)
+      {
+        Logger.Error(ex.Message, ex);
+        if (Locks.GetLockInfo(formalizedDoc).IsLocked)
+          Locks.Unlock(formalizedDoc);
+        
+        var messageError = Functions.Module.SerializeMessageFromError(ex.Message, result.correlation_id, queueErrors);
+        Functions.Module.SendMessageFromRabbitMQ(messageError, routingKeyError, exchangePoint);
+      }
+    }
+
     public virtual void UpdateCompany(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.UpdateCompanyInvokeArgs args)
     {
+      if (args.RetryIteration > 50)
+      {
+        args.Retry = false;
+        return;
+      }
+      
       var companies = AEOHSolution.Companies.GetAll();
       var result = Functions.Module.DeserializeMessageFromCompany(args.Message);
       var resultBody = result.body;
@@ -98,10 +381,11 @@ namespace aeon.Integration1C.Server
           #endregion
 
           company.Save();
-          Locks.Unlock(company);
+          if (Locks.GetLockInfo(company).IsLocked)
+            Locks.Unlock(company);
           
           var messageResult = Functions.Module.SerializeMessageFromResult(company.Id, company.Guid1C, result.correlation_id);
-          Functions.Module.SendMessageFromRabbitMQ(messageResult, args.RoutingKeyVerification);
+          Functions.Module.SendMessageFromRabbitMQ(messageResult, args.RoutingKeyVerification, args.ExchangePoint);
         }
         else
         {
@@ -112,14 +396,21 @@ namespace aeon.Integration1C.Server
       catch (Exception ex)
       {
         Logger.Error(ex.Message, ex);
-        Locks.Unlock(company);
-        var messageError = Functions.Module.SerializeMessageFromError(ex.Message, result.correlation_id);
-        Functions.Module.SendMessageFromRabbitMQ(messageError, args.RoutingKeyError);
+        if (Locks.GetLockInfo(company).IsLocked)
+          Locks.Unlock(company);
+        var messageError = Functions.Module.SerializeMessageFromError(ex.Message, result.correlation_id, args.QueueErrors);
+        Functions.Module.SendMessageFromRabbitMQ(messageError, args.RoutingKeyError, args.ExchangePoint);
       }
     }
 
     public virtual void UpdateContractualDoc(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.UpdateContractualDocInvokeArgs args)
     {
+      if (args.RetryIteration > 50)
+      {
+        args.Retry = false;
+        return;
+      }
+      
       var result = Functions.Module.DeserializeMessageFromContractualDoc(args.Message);
       var resultBody = result.body;
       var oldContractualDoc = AEOHSolution.ContractualDocuments.Null;
@@ -232,10 +523,11 @@ namespace aeon.Integration1C.Server
           #endregion
           
           contractualDoc.Save();
-          Locks.Unlock(contractualDoc);
+          if (Locks.GetLockInfo(contractualDoc).IsLocked)
+            Locks.Unlock(contractualDoc);
           
           var messageResult = Functions.Module.SerializeMessageFromResult(contractualDoc.Id, contractualDoc.Guid1C, result.correlation_id);
-          Functions.Module.SendMessageFromRabbitMQ(messageResult, args.RoutingKeyVerification);
+          Functions.Module.SendMessageFromRabbitMQ(messageResult, args.RoutingKeyVerification, args.ExchangePoint);
         }
         else
         {
@@ -246,18 +538,25 @@ namespace aeon.Integration1C.Server
       catch (Exception ex)
       {
         Logger.Error(ex.Message, ex);
-        Locks.Unlock(contractualDoc);
-        var messageError = Functions.Module.SerializeMessageFromError(ex.Message, result.correlation_id);
-        Functions.Module.SendMessageFromRabbitMQ(messageError, args.RoutingKeyError);
+        if (Locks.GetLockInfo(contractualDoc).IsLocked)
+          Locks.Unlock(contractualDoc);
+        var messageError = Functions.Module.SerializeMessageFromError(ex.Message, result.correlation_id, args.QueueErrors);
+        Functions.Module.SendMessageFromRabbitMQ(messageError, args.RoutingKeyError, args.ExchangePoint);
       }
     }
 
     public virtual void SendContractualDocsIn1CAsync(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.SendContractualDocsIn1CAsyncInvokeArgs args)
     {
+      if (args.RetryIteration > 100)
+      {
+        args.Retry = false;
+        return;
+      }
+      
       var setting = Functions.SettingsIntegration.GetSettingsIntegration();
       var contractualDocs = aeon.AEOHSolution.ContractualDocuments.GetAll(c => c.IsMustBeSent1C.GetValueOrDefault() && c.Counterparty != null &&
                                                                           aeon.AEOHSolution.Companies.Is(c.Counterparty));
-      var exchange = setting.ExchangePoint;
+      var exchange = setting.ExchangePointHM;
       var routingKey = setting.RoutingKeySendContracts;
       var hostName = setting.ServerName;
       var virtualHost = setting.VirtualHost;
@@ -278,7 +577,7 @@ namespace aeon.Integration1C.Server
           var correlationID = Guid.NewGuid().ToString();
           var json = Functions.Module.SerializeMessageFromContractualDoc(document, correlationID, queueName);
           Logger.Error(json);
-          Functions.Module.SendMessageFromRabbitMQ(json, routingKey);
+          Functions.Module.SendMessageFromRabbitMQ(json, routingKey, exchange);
           document.IsMustBeSent1C = false;
           document.CorrelationId = correlationID;
           document.Save();
@@ -293,8 +592,14 @@ namespace aeon.Integration1C.Server
 
     public virtual void GetIntegrationsResultsAsync(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.GetIntegrationsResultsAsyncInvokeArgs args)
     {
+      if (args.RetryIteration > 100)
+      {
+        args.Retry = false;
+        return;
+      }
+      
       var setting = Functions.SettingsIntegration.GetSettingsIntegration();
-      var exchange = setting.ExchangePoint;
+      var exchange = setting.ExchangePointHM;
       var hostName = setting.ServerName;
       var virtualHost = setting.VirtualHost;
       var userName = setting.UserName;
@@ -325,8 +630,7 @@ namespace aeon.Integration1C.Server
       
       #region Получить результаты интеграции.
       
-      var queueVerifications = setting.QueueGetForVerification;
-      var messageVerifications = Functions.Module.GetMessagesFromRabbitMQ(queueVerifications);
+      var messageVerifications = Functions.Module.GetMessagesFromRabbitMQ(setting.QueueGetForVerification);
       foreach (var message in messageVerifications)
       {
         var result = Functions.Module.DeserializeMessageFromVerification(message);
@@ -349,7 +653,8 @@ namespace aeon.Integration1C.Server
               company.Guid1C = resultBody.Guid;
             
             company.Save();
-            Locks.Unlock(company);
+            if (Locks.GetLockInfo(company).IsLocked)
+              Locks.Unlock(company);
           }
           else
           {
@@ -372,7 +677,8 @@ namespace aeon.Integration1C.Server
               contractualDocs.Guid1C = resultBody.Guid;
             
             contractualDocs.Save();
-            Locks.Unlock(contractualDocs);
+            if (Locks.GetLockInfo(contractualDocs).IsLocked)
+              Locks.Unlock(contractualDocs);
           }
           else
           {
@@ -388,10 +694,16 @@ namespace aeon.Integration1C.Server
 
     public virtual void SendCompanyIn1CAsync(aeon.Integration1C.Server.AsyncHandlerInvokeArgs.SendCompanyIn1CAsyncInvokeArgs args)
     {
+      if (args.RetryIteration > 100)
+      {
+        args.Retry = false;
+        return;
+      }
+      
       var setting = Functions.SettingsIntegration.GetSettingsIntegration();
       var companies = aeon.AEOHSolution.Companies.GetAll(c => c.IsMustBeSent1C.GetValueOrDefault() && c.Status == aeon.AEOHSolution.Company.Status.Active &&
                                                          !c.IsForOffice.GetValueOrDefault());
-      var exchange = setting.ExchangePoint;
+      var exchange = setting.ExchangePointHM;
       var routingKey = setting.RoutingKeySendCounterparties;
       var hostName = setting.ServerName;
       var virtualHost = setting.VirtualHost;
@@ -407,7 +719,7 @@ namespace aeon.Integration1C.Server
         {
           var correlationID = Guid.NewGuid().ToString();
           var json = Functions.Module.SerializeMessageFromCompany(company, correlationID, queueName);
-          Functions.Module.SendMessageFromRabbitMQ(json, routingKey);
+          Functions.Module.SendMessageFromRabbitMQ(json, routingKey, exchange);
           company.IsMustBeSent1C = false;
           company.CorrelationId = correlationID;
           company.Save();

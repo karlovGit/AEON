@@ -14,6 +14,8 @@ namespace aeon.AEOHSolution
     {
       base.Created(e);
       _obj.SkipRenegotiation = false;
+      _obj.ChangeSequence = false;
+      _obj.NotifyApprovers = false;
     }
   }
 

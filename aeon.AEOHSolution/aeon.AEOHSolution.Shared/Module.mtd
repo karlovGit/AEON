@@ -111,6 +111,30 @@
     {
       "ItemId": "9f05de1d-0eef-468b-b75a-0e151a379d53",
       "PreviousItemId": "1c4986be-6d55-43a5-b85d-ddf51b7d14d0"
+    },
+    {
+      "ItemId": "dcba346e-d976-4a8a-afe3-c1587c0e6bd8",
+      "PreviousItemId": "9f05de1d-0eef-468b-b75a-0e151a379d53"
+    },
+    {
+      "ItemId": "d4968798-80a8-46ab-96c1-1172b11a7984",
+      "PreviousItemId": "dcba346e-d976-4a8a-afe3-c1587c0e6bd8"
+    },
+    {
+      "ItemId": "feb2d22c-57eb-4f68-af7c-ff035d8470a5",
+      "PreviousItemId": "d4968798-80a8-46ab-96c1-1172b11a7984"
+    },
+    {
+      "ItemId": "34244072-c016-44de-a0fe-bffb80178a98",
+      "PreviousItemId": "feb2d22c-57eb-4f68-af7c-ff035d8470a5"
+    },
+    {
+      "ItemId": "f679c3f7-e8b7-4d4f-8ef4-8b447f235747",
+      "PreviousItemId": "34244072-c016-44de-a0fe-bffb80178a98"
+    },
+    {
+      "ItemId": "c65de2e1-8449-449b-a6ef-f572c5033ee7",
+      "PreviousItemId": "f679c3f7-e8b7-4d4f-8ef4-8b447f235747"
     }
   ],
   "IconResourcesKeys": [],
@@ -127,7 +151,7 @@
   "SharedAssemblyName": "aeon.AEOHSolution.Shared",
   "SharedNamespace": "aeon.AEOHSolution.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.19",
+  "Version": "0.0.1.51",
   "Widgets": [],
   "Versions": [
     {

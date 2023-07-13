@@ -16,6 +16,7 @@ namespace aeon.Integration1C.Server
       CreateCounterpartyKinds();
       CreateRoles();
       GrantRightsOnDatabooks();
+      CreateDocumentKinds();
     }
 
     /// <summary>
@@ -81,6 +82,19 @@ namespace aeon.Integration1C.Server
       
       SettingsIntegrations.AccessRights.Save();
       CounterpartyKinds.AccessRights.Save();
+    }
+
+    /// <summary>
+    /// Создать виды документов.
+    /// </summary>
+    public static void CreateDocumentKinds()
+    {
+      InitializationLogger.Debug("Init: Create document kinds.");
+      
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateDocumentKind(aeon.Integration1C.Resources.NonFormalizedSimpleDocumentKindName, aeon.Integration1C.Resources.NonFormalizedSimpleDocumentKindName,
+                         Sungero.Docflow.DocumentKind.NumberingType.NotNumerable, Sungero.Docflow.DocumentKind.DocumentFlow.Inner, false, false, Constants.Module.FormalizedDocTypeGuids.SimpleDocumentTypeGuid,
+                         new Sungero.Domain.Shared.IActionInfo[] { Sungero.Docflow.OfficialDocuments.Info.Actions.SendActionItem, Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval, Sungero.Docflow.OfficialDocuments.Info.Actions.SendForAcquaintance },
+                         Constants.Module.NonFormalizedSimpleDocumentKind);
     }
   }
 }

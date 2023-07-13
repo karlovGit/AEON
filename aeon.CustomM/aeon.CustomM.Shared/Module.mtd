@@ -34,6 +34,14 @@
   "ExplorerTreeOrder": [
     {
       "ItemId": "2147fc59-3d71-4828-aeb7-9864049586b2"
+    },
+    {
+      "ItemId": "20f98fb6-d5d1-4af1-9bf5-6e3a8a081542",
+      "PreviousItemId": "2147fc59-3d71-4828-aeb7-9864049586b2"
+    },
+    {
+      "ItemId": "82c69535-5347-4225-b393-758b1ffd8ce8",
+      "PreviousItemId": "20f98fb6-d5d1-4af1-9bf5-6e3a8a081542"
     }
   ],
   "HandledEvents": [
@@ -55,20 +63,30 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"E8487138-7B1E-4383-A5CF-B6BE6E80A969\")"
+    },
+    {
+      "Name": "ExceptionsToSupervisory",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"1D5105A6-231A-49C3-B1FC-B6623C502F20\")"
     }
   ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "aeon.CustomM",
   "ResourcesKeys": [
-    "ChiefAccountantsOurOrgsName"
+    "ChiefAccountantsOurOrgsName",
+    "ExceptionsToSupervisoryRole",
+    "DescriptionExceptionsToSupervisoryRole"
   ],
   "ServerAssemblyName": "aeon.CustomM.Server",
   "ServerNamespace": "aeon.CustomM.Server",
   "SharedAssemblyName": "aeon.CustomM.Shared",
   "SharedNamespace": "aeon.CustomM.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.21",
+  "Version": "0.0.1.51",
   "Widgets": [],
   "Versions": [
     {

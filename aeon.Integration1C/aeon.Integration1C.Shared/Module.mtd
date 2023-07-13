@@ -40,8 +40,18 @@
           "ParameterType": "String"
         },
         {
+          "NameGuid": "1f30998b-7da0-4460-b632-bd39fe533dc7",
+          "Name": "QueueErrors",
+          "ParameterType": "String"
+        },
+        {
           "NameGuid": "2ac913cd-a08e-4bb0-ac6c-ea694e7b738f",
           "Name": "RoutingKeyError",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "3fc70f70-eff2-423d-8968-eecd4caa9a10",
+          "Name": "ExchangePoint",
           "ParameterType": "String"
         },
         {
@@ -74,8 +84,46 @@
           "ParameterType": "String"
         },
         {
+          "NameGuid": "9dac08fb-5852-407f-b11d-e478a027559f",
+          "Name": "ExchangePoint",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "ac389733-c082-4d2e-9f82-9cf2032ea334",
+          "Name": "QueueErrors",
+          "ParameterType": "String"
+        },
+        {
           "NameGuid": "e313e92a-5b71-437b-943e-bd423c023c1c",
           "Name": "RoutingKeyVerification",
+          "ParameterType": "String"
+        }
+      ]
+    },
+    {
+      "NameGuid": "af298b23-6cb7-4404-ab51-62ed36a0062c",
+      "Name": "UpdateFormalizedDoc",
+      "DelayPeriod": 5,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "80e95f7e-01fd-4029-8abd-71972c33242c",
+          "Name": "Message",
+          "ParameterType": "String"
+        }
+      ]
+    },
+    {
+      "NameGuid": "76a6ebda-7a63-4b33-8bc6-cf014dc2e056",
+      "Name": "UpdateNonFormalizedDoc",
+      "DelayPeriod": 5,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "768782f4-6735-42bf-8803-a970df038db0",
+          "Name": "Message",
           "ParameterType": "String"
         }
       ]
@@ -96,6 +144,15 @@
         "Name": "ShowSettingsIntegration",
         "FunctionName": "ShowSettingsIntegration",
         "GroupId": "8ebcc1ee-99e4-49dd-a3ee-49af916a7589"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "dee31583-f10f-4fbf-8311-b46d1b98bafe",
+        "Name": "OpenBodyDocument",
+        "FunctionName": "OpenBodyDocument",
+        "GroupId": "8ebcc1ee-99e4-49dd-a3ee-49af916a7589",
+        "IsVisible": false,
+        "PreviousItemGuid": "38058931-1a29-4a96-ac8c-e7b344832558"
       }
     ],
     "Background": null,
@@ -175,6 +232,27 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "d355e3fe-4acc-4e1d-9615-a344e195fa8f",
+      "Name": "GetFormalizedDocsIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "df6e62d5-fde4-4090-ad71-c307de532995",
+      "Name": "GetNonFormalizedDocsIn1C",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "c20dca7d-97ae-43dc-8856-c1c19aabaa66",
+      "Name": "SendingFinancialDocumentsForApproval",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
     }
   ],
   "Libraries": [
@@ -187,9 +265,22 @@
       "NameGuid": "84688371-ed0f-4966-9830-fe4e8f56f61b",
       "Name": "RabbitMQ",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "b917470f-2ceb-4681-b1d8-c02246b9f3e5",
+      "Name": "FDP",
+      "Scope": "Server"
     }
   ],
   "PublicConstants": [
+    {
+      "Name": "NonFormalizedSimpleDocumentKind",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"057B530E-2F1B-4C0D-A5A6-6A2C3A29FCE5\")"
+    },
     {
       "Name": "ResponsibleForIntegration1CRoleGuid",
       "ParentClasses": [
@@ -212,14 +303,17 @@
     "SelfEmployedCounterpartyKind",
     "SeparateSubdivisionCounterpartyKind",
     "GovernmentBodyCounterpartyKind",
-    "SqlDateTimeException"
+    "SqlDateTimeException",
+    "NonFormalizedSimpleDocumentKindName",
+    "AbortingReasonApprovalFinancialDocs",
+    "TaskSubjectForManualSendingDocument"
   ],
   "ServerAssemblyName": "aeon.Integration1C.Server",
   "ServerNamespace": "aeon.Integration1C.Server",
   "SharedAssemblyName": "aeon.Integration1C.Shared",
   "SharedNamespace": "aeon.Integration1C.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.39",
+  "Version": "0.0.1.68",
   "Widgets": [],
   "Versions": [
     {
