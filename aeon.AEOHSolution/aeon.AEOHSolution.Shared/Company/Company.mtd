@@ -2,6 +2,16 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "a2b8c5f0-3cad-4b6a-9c39-eaf22bed245d",
   "Name": "Company",
+  "Actions": [
+    {
+      "NameGuid": "4ae27d62-a4e2-4fe9-ac57-77d35cf14ea1",
+      "Name": "CreateNOR",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CreateNOR_large_4ae27d62a4e24fe9ac5777d35cf14ea1.png",
+      "SmallIconName": "Action_CreateNOR_small_4ae27d62a4e24fe9ac5777d35cf14ea1.png"
+    }
+  ],
   "BaseGuid": "593e143c-616c-4d95-9457-fd916c4aa7f8",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -37,7 +47,6 @@
               "Percentage": 45.0
             }
           ],
-          "IsAncestorMetadata": true,
           "Overridden": [
             "Controls",
             "ColumnDefinitions"
@@ -515,7 +524,10 @@
         }
       ],
       "IsAncestorMetadata": true,
-      "Overridden": [],
+      "Overridden": [
+        "Controls",
+        "UseAncestorControls"
+      ],
       "Versions": []
     }
   ],
@@ -664,13 +676,48 @@
       "PreviousPropertyGuid": "52f6b808-a0a3-4bf6-9882-8e47e9f8c165"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "NORNotFound",
+      "Parameters": [
+        {
+          "Name": "company",
+          "ParameterType": "global::aeon.AEOHSolution.ICompany",
+          "ParameterTypeFullName": "aeon.AEOHSolution.ICompany, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "SCreateNOR",
+      "Parameters": [
+        {
+          "Name": "company",
+          "ParameterType": "global::aeon.AEOHSolution.ICompany",
+          "ParameterTypeFullName": "aeon.AEOHSolution.ICompany, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {
     "NameGuid": "9538620e-88a0-47fb-90fb-3080ceab95c7",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "ccf01f6f-adf2-4d25-966b-a69022bae42e",
+        "Name": "CreateNOR",
+        "ActionGuid": "4ae27d62-a4e2-4fe9-ac57-77d35cf14ea1",
+        "Index": 51,
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

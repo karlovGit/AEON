@@ -276,4 +276,13 @@
   <data name="Property_RegNumber" xml:space="preserve">
     <value>Рег. номер</value>
   </data>
+  <data name="Action_CreateNOR" xml:space="preserve">
+    <value>Создать НОР</value>
+  </data>
+  <data name="Action_CreateNORHint" xml:space="preserve">
+    <value>Создать НОР на основе данного контрагента</value>
+  </data>
+  <data name="ControlGroup_149a02ccc0af4bec8a1b8d6c0bab1d81" xml:space="preserve">
+    <value />
+  </data>
 </root>
