@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -9,6 +9,21 @@ namespace aeon.AEOHSolution.Server
 {
   partial class BusinessUnitFunctions
   {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Public,Remote]
+    public override void  SynchronizeCEOInRole()
+    {
+      base.SynchronizeCEOInRole();
+    }
+    
+    [Public,Remote]
+    public override void UpdateSignatureSettings()
+    {
+      base.UpdateSignatureSettings();
+    }
 
   }
 }

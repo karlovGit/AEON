@@ -532,6 +532,36 @@
       "PreviousPropertyGuid": "be4c94f1-1b43-4c8f-b7d8-e9a37a5e3766"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "SynchronizeCEOInRole",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::aeon.AEOHSolution.IBusinessUnit",
+          "ParameterTypeFullName": "aeon.AEOHSolution.IBusinessUnit, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "UpdateSignatureSettings",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::aeon.AEOHSolution.IBusinessUnit",
+          "ParameterTypeFullName": "aeon.AEOHSolution.IBusinessUnit, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {
