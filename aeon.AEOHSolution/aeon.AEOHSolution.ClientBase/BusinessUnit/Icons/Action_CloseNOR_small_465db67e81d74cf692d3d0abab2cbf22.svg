@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800"
+   height="800"
+   viewBox="0 0 1024 1024"
+   class="icon"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="delete-column-svgrepo-com.svg"
+   inkscape:export-filename="Новая папка\delete32.svg"
+   inkscape:export-xdpi="3.8399999"
+   inkscape:export-ydpi="3.8399999"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false" />
+  <path
+     d="M 640,106.66667 H 384 c -46.93333,0 -85.33333,38.4 -85.33333,85.33333 v 640 c 0,46.93333 38.4,85.33333 85.33333,85.33333 h 256 c 46.93333,0 85.33333,-38.4 85.33333,-85.33333 V 192 c 0,-46.93333 -38.4,-85.33333 -85.33333,-85.33333 z M 384,832 V 192 h 256 v 640 z"
+     fill="#90caf9"
+     id="path2" />
+  <path
+     d="m 810.66667,810.66667 m -213.33334,0 a 213.33334,213.33334 0 1 0 426.66667,0 213.33334,213.33334 0 1 0 -426.66667,0 z"
+     fill="#f44336"
+     id="path4" />
+  <path
+     d="M 923.94667,878.528 878.72,923.79733 697.70667,742.80533 742.95467,697.536 Z"
+     fill="#ffffff"
+     id="path6" />
+  <path
+     d="M 742.80533,923.94667 697.536,878.72 878.528,697.70667 l 45.26933,45.248 z"
+     fill="#ffffff"
+     id="path8" />
+</svg>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -9,22 +9,6 @@ namespace aeon.AEOHSolution
 {
   partial class BusinessUnitServerHandlers
   {
-    
-   
-   
-    public override void Saving(Sungero.Domain.SavingEventArgs e)
-    {
-      //base.Saving(e);
-     
-      
-      // Синхронизировать с ролью "Руководители наших организаций".
-      PublicFunctions.BusinessUnit.Remote.SynchronizeCEOInRole(_obj);
-      
-      
-      // Создать или обновить права подписи у руководителя.
-      PublicFunctions.BusinessUnit.Remote.UpdateSignatureSettings(_obj);
-      
-    }
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {

@@ -264,4 +264,19 @@
   <data name="Property_LeaderInvolvedNegotiation" xml:space="preserve">
     <value>The leader is involved in the negotiation</value>
   </data>
+  <data name="Action_CloseNOR" xml:space="preserve">
+    <value>CloseNOR</value>
+  </data>
+  <data name="Action_CloseNORDescription" xml:space="preserve">
+    <value>CloseNOR</value>
+  </data>
+  <data name="Action_CloseNORHint" xml:space="preserve">
+    <value>CloseNOR</value>
+  </data>
+  <data name="Action_CloseNORConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CloseNORConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

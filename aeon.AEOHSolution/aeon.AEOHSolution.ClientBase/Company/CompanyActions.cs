@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -9,22 +9,24 @@ namespace aeon.AEOHSolution.Client
 {
   partial class CompanyActions
   {
+
     public virtual void CreateNOR(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if ( aeon.AEOHSolution.PublicFunctions.Company.NORNotFound(_obj))
+       if ( aeon.AEOHSolution.PublicFunctions.Company.NORNotFound(_obj))
       {
         try{
           aeon.AEOHSolution.PublicFunctions.Company.SCreateNOR(_obj);
           e.AddInformation("Наша организация создана");
+          
         }
         catch(Exception ex)
         {
           e.AddError("Вознилка ошибка: " + ex.Message);
         }
-        
-      }
-      
-      else e.AddInformation("По данному контрагенту уже заведена наша организация");
+       }
+       else e.AddInformation("По данному контрагенту уже заведена наша организация");
+       
+   
       
      
     }

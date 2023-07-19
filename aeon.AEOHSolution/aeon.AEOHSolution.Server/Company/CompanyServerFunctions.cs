@@ -21,40 +21,44 @@ namespace aeon.AEOHSolution.Server
     [Public]
     public void SCreateNOR()
     {
+      var company =  aeon.AEOHSolution.BusinessUnits.Create();
+      company.Nonresident = _obj.Nonresident;
+      company.Name = _obj.Name;
+      company.TIN = _obj.TIN;
+      company.TRRC = _obj.TRRC;
+      company.PSRN = _obj.PSRN;
+      company.NCEO = _obj.NCEO;
+      company.NCEA = _obj.NCEA;
+      company.City = _obj.City;
+      company.Phones = _obj.Phones;
+      company.LegalName = _obj.LegalName;
+      company.Region = _obj.Region;
+      company.LegalAddress = _obj.LegalAddress;
+      company.PostalAddress = _obj.PostalAddress;
+      company.Status = _obj.Status;
+      company.Email = _obj.Email;
+      company.Homepage = _obj.Homepage;
+      company.Account = _obj.Account;
+      company.Bank = _obj.Bank;
+      company.Code = _obj.Code;
+      company.Company = _obj;
+      company.Save();
+      // Синхронизировать с ролью "Руководители наших организаций".
+      PublicFunctions.BusinessUnit.Remote.SynchronizeCEOInRole(company);
       
-      #region старый
-     // company.Nonresident = _obj.Nonresident;
-     // company.Name = _obj.Name;
-     // company.TIN = _obj.TIN;
-     // company.TRRC = _obj.TRRC;
-     // company.PSRN = _obj.PSRN;
-     // company.NCEO = _obj.NCEO;
-     // company.NCEA = _obj.NCEA;
-     // company.City = _obj.City;
-     // company.Phones = _obj.Phones;
-     // company.LegalName = _obj.LegalName;
-     // company.Region = _obj.Region;
-     // company.LegalAddress = _obj.LegalAddress;
-     // company.PostalAddress = _obj.PostalAddress;
-     // company.Status = _obj.Status;
-     // company.Email = _obj.Email;
-     // company.Homepage = _obj.Homepage;
-     // company.Account = _obj.Account;
-     // company.Bank = _obj.Bank;
-     // company.Code = _obj.Code;
-      #endregion
-        //Закрываем старого контрагента:
-       //_obj.Status = Sungero.CoreEntities.DatabookEntry.Status.Closed;
-       //_obj.Save();
-        //Создаем новую НОР:
-        var NOR =  aeon.AEOHSolution.BusinessUnits.Create();
-        NOR.Name = _obj.Name;
-        NOR.LegalName = _obj.LegalName;
-        NOR.Region = _obj.Region;
-        NOR.TIN = _obj.TIN;
-        NOR.TRRC = _obj.TRRC;
-        NOR.Company = _obj;
-        NOR.Save();
+      
+      // Создать или обновить права подписи у руководителя.
+      PublicFunctions.BusinessUnit.Remote.UpdateSignatureSettings(company);
+         
+      //  //Создаем новую НОР:
+      //  var NOR =  aeon.AEOHSolution.BusinessUnits.Create();
+      //  NOR.Name = _obj.Name;
+      //  NOR.LegalName = _obj.LegalName;
+      //  NOR.Region = _obj.Region;
+      //  NOR.TIN = _obj.TIN;
+      //  NOR.TRRC = _obj.TRRC;
+      //  NOR.Company = _obj;
+      //  NOR.Save();
       
     }
 

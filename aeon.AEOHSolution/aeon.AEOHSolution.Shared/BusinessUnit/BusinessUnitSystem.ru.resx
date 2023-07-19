@@ -264,4 +264,13 @@
   <data name="Property_LeaderInvolvedNegotiation" xml:space="preserve">
     <value>Руководитель участвует в согласовании</value>
   </data>
+  <data name="Action_CloseNOR" xml:space="preserve">
+    <value>Закрыть НО</value>
+  </data>
+  <data name="Action_CloseNORHint" xml:space="preserve">
+    <value>Закрыть НО</value>
+  </data>
+  <data name="Action_CloseNORDescription" xml:space="preserve">
+    <value>Закрыть НО</value>
+  </data>
 </root>

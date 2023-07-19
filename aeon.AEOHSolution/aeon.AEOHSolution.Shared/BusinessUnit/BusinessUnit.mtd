@@ -2,6 +2,16 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "5c69693d-6efe-4ad4-b2f4-3dac4cd72fbc",
   "Name": "BusinessUnit",
+  "Actions": [
+    {
+      "NameGuid": "465db67e-81d7-4cf6-92d3-d0abab2cbf22",
+      "Name": "CloseNOR",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CloseNOR_large_465db67e81d74cf692d3d0abab2cbf22.png",
+      "SmallIconName": "Action_CloseNOR_small_465db67e81d74cf692d3d0abab2cbf22.png"
+    }
+  ],
   "BaseGuid": "eff95720-181f-4f7d-892d-dec034c7b2ab",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -487,8 +497,7 @@
   ],
   "HandledEvents": [
     "RefreshClient",
-    "BeforeSaveServer",
-    "SavingServer"
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "eff95720-181f-4f7d-892d-dec034c7b2ab",
@@ -534,6 +543,18 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "CreateNewCompany",
+      "Parameters": [
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::aeon.AEOHSolution.IBusinessUnit",
+          "ParameterTypeFullName": "aeon.AEOHSolution.IBusinessUnit, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "SynchronizeCEOInRole",
       "IsRemote": true,
       "Parameters": [
@@ -568,7 +589,78 @@
     "NameGuid": "40b5ef84-bb89-42ff-96b5-cfc7d38f8131",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "5c42da64-c76e-4cb0-bbaf-6e5902fa370f",
+        "Name": "CopyToClipboardFromCard",
+        "ActionGuid": "9f3a6515-a2c2-47fd-838b-672d5d123b6c",
+        "Index": 31,
+        "IsAncestorMetadata": true,
+        "IsShowInContextMenu": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "9107126c-ce40-4cd8-b854-2e7a297159b1",
+        "Name": "CopyEntity",
+        "ActionGuid": "00fae4b6-935a-4047-831d-312fd3c02faf",
+        "Index": 36,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "211a539e-80f7-4ff8-a13e-855957ff6e68",
+        "Name": "DeleteEntity",
+        "ActionGuid": "18cdb157-e89a-488b-8cea-bce6a63d0a13",
+        "Index": 41,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e34e3e39-bcb9-4de3-a0ea-849c79ad9dcb",
+        "Name": "Cancel",
+        "ActionGuid": "8049bcb6-eb35-463f-bb18-45090e8b3add",
+        "Index": 51,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "6ecf8abf-7ebe-40eb-9497-353db6415945",
+        "Name": "OpenInNewTab",
+        "ActionGuid": "d1d0ab2f-c398-43f6-b01f-5f2f5169c4f6",
+        "Index": 41,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8449d5c9-a100-487d-9b07-8e62fa4a5b09",
+        "Name": "ActionButton",
+        "ActionGuid": "465db67e-81d7-4cf6-92d3-d0abab2cbf22",
+        "ButtonSize": "Large",
+        "Index": 22,
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],
