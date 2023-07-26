@@ -543,6 +543,18 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "CheckCloseNORAbility",
+      "Parameters": [
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::aeon.AEOHSolution.IBusinessUnit",
+          "ParameterTypeFullName": "aeon.AEOHSolution.IBusinessUnit, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
       "Name": "CreateNewCompany",
       "Parameters": [
         {

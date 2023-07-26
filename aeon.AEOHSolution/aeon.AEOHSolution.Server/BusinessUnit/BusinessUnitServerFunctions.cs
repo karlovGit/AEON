@@ -35,12 +35,12 @@ namespace aeon.AEOHSolution.Server
       newCompany.Account = _obj.Account;
       newCompany.Bank = _obj.Bank;
       newCompany.Code = _obj.Code;
-      
+      newCompany.Status = Status.Closed;
       
       newCompany.Save();
       _obj.Company = newCompany;
       _obj.Save();
-      newCompany.Status = Status.Closed;
+    //  newCompany.Status = Status.Closed;
       newCompany.IsCardReadOnly = true;
       newCompany.Save();
       
@@ -59,6 +59,17 @@ namespace aeon.AEOHSolution.Server
     public override void UpdateSignatureSettings()
     {
       base.UpdateSignatureSettings();
+    }
+    
+    /// <summary>
+    /// Проверка при повторном нажатии, будет ли создавать закрытого контрагента для закрываемое НО. 
+    /// Если контрагент со статусом "Закрыт" уже существует, то false
+    /// </summary>
+    /// <returns></returns>
+    [Public]
+    public virtual bool CheckCloseNORAbility()
+    {
+      return !Sungero.Parties.Companies.GetAll(x=>x.Equals(_obj.Company) && x.Status.Equals(Status.Closed)).Any();
     }
 
   }

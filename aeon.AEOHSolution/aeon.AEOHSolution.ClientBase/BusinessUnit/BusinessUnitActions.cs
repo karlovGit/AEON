@@ -11,6 +11,7 @@ namespace aeon.AEOHSolution.Client
   {
     public virtual void CloseNOR(Sungero.Domain.Client.ExecuteActionArgs e)
     {
+      
       //меняем readonly в карточке контрагента
       var contragent =  _obj.Company;
       contragent.IsCardReadOnly = false;
@@ -19,6 +20,11 @@ namespace aeon.AEOHSolution.Client
       //создаем новую организацию с закрытым статусом и проставляем ссылку на новую организацию для НО
       aeon.AEOHSolution.PublicFunctions.BusinessUnit.CreateNewCompany(_obj);
       _obj.Status = Status.Closed;
+      foreach (var prop in _obj.State.Properties)
+      {
+        prop.IsEnabled = false;
+      }
+      
       _obj.Save();
       e.AddWarning("Наша организация закрыта");
       
@@ -27,7 +33,7 @@ namespace aeon.AEOHSolution.Client
 
     public virtual bool CanCloseNOR(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return true;
+      return  aeon.AEOHSolution.PublicFunctions.BusinessUnit.CheckCloseNORAbility(_obj);
     }
 
   }

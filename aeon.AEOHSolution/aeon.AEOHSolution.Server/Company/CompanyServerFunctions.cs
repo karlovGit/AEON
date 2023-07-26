@@ -13,8 +13,37 @@ namespace aeon.AEOHSolution.Server
     [Public]
     public bool NORNotFound()
     {
-      return !aeon.AEOHSolution.BusinessUnits.GetAll().Any(x=>(x.TIN==_obj.TIN && x.TRRC==_obj.TRRC) || (x.TIN==_obj.TIN));
+      return !aeon.AEOHSolution.BusinessUnits.GetAll().Any(x=>((x.TIN==_obj.TIN && x.TRRC==_obj.TRRC) || (x.TIN==_obj.TIN)) );
     }
+    
+    [Public]
+    public bool ClosedNORFound()
+    {
+      return aeon.AEOHSolution.BusinessUnits.GetAll().Any(x=>((x.TIN==_obj.TIN && x.TRRC==_obj.TRRC) || (x.TIN==_obj.TIN)) && x.Status.Equals(Sungero.CoreEntities.DatabookEntry.Status.Closed));
+    }
+    
+    [Public]
+    public void OpenNOR()
+    {
+     // var norList =  aeon.AEOHSolution.BusinessUnits.GetAll().Where(xx=>xx.Company.Equals(_obj)); //неправильно ищет
+      var norList =  aeon.AEOHSolution.BusinessUnits.GetAll().Where(xx=>xx.TIN==_obj.TIN && xx.TRRC==_obj.TRRC && _obj.Status.Equals(Status.Closed));
+      if (norList.Any()) 
+      {
+        var nor = norList.FirstOrDefault();
+        nor.Status = Status.Active;
+        nor.Save();
+      }
+      else 
+      {
+        Logger.Debug("variable norList is empty");
+      }
+      
+    }
+    
+    //    public bool OpenClosedNOR()
+    //    {
+    //      return !aeon.AEOHSolution.BusinessUnits.GetAll()
+    //    }
     /// <summary>
     /// Создать НОР
     /// </summary>
@@ -49,16 +78,8 @@ namespace aeon.AEOHSolution.Server
       
       // Создать или обновить права подписи у руководителя.
       PublicFunctions.BusinessUnit.Remote.UpdateSignatureSettings(company);
-         
-      //  //Создаем новую НОР:
-      //  var NOR =  aeon.AEOHSolution.BusinessUnits.Create();
-      //  NOR.Name = _obj.Name;
-      //  NOR.LegalName = _obj.LegalName;
-      //  NOR.Region = _obj.Region;
-      //  NOR.TIN = _obj.TIN;
-      //  NOR.TRRC = _obj.TRRC;
-      //  NOR.Company = _obj;
-      //  NOR.Save();
+      
+      
       
     }
 

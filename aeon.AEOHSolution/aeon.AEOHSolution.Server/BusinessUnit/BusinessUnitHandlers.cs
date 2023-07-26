@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -12,6 +12,8 @@ namespace aeon.AEOHSolution
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
+      
+      
       base.BeforeSave(e);
       
       var role = Roles.GetAll().FirstOrDefault(x => x.Sid == aeon.CustomM.PublicConstants.Module.ChiefAccountantsOurOrgs);
@@ -20,6 +22,16 @@ namespace aeon.AEOHSolution
         if (_obj.ChiefAccountant != null && !role.RecipientLinks.Any(r => Equals(r.Member, _obj.ChiefAccountant)))
           role.RecipientLinks.AddNew().Member = _obj.ChiefAccountant;
       }
+    
+      if (_obj.Status.Equals(Status.Closed))
+      {
+        foreach (var prop in _obj.State.Properties)
+        {
+          prop.IsEnabled = false;
+        }
+      }
+      
+     
     }
   }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -12,7 +12,8 @@ namespace aeon.AEOHSolution.Client
 
     public virtual void CreateNOR(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-       if ( aeon.AEOHSolution.PublicFunctions.Company.NORNotFound(_obj))
+      //если нет НОР (ИНН/КПП) со статусом "Открыт"
+      if ( aeon.AEOHSolution.PublicFunctions.Company.NORNotFound(_obj))
       {
         try{
           aeon.AEOHSolution.PublicFunctions.Company.SCreateNOR(_obj);
@@ -23,17 +24,24 @@ namespace aeon.AEOHSolution.Client
         {
           e.AddError("Вознилка ошибка: " + ex.Message);
         }
-       }
-       else e.AddInformation("По данному контрагенту уже заведена наша организация");
-       
-   
+      }
+      else
+      {
+        //если есть НОР (ИНН/КПП) со статусом "Закрыт"
+        if (aeon.AEOHSolution.PublicFunctions.Company.ClosedNORFound(_obj))
+        {
+          //То открываем НОР:
+          aeon.AEOHSolution.PublicFunctions.Company.OpenNOR(_obj);
+          e.AddWarning("Была обнаружена закрытая НОР. Запись была открыта");
+        }
+        else e.AddInformation("По данному контрагенту уже существует открытая наша организация");
+      }
       
-     
     }
 
     public virtual bool CanCreateNOR(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      if (_obj.State.IsInserted) return false;
+      if (_obj.State.IsInserted || _obj.Status.Equals(Status.Closed))  return false;
       else return true;
     }
 

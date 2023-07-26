@@ -678,6 +678,18 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "ClosedNORFound",
+      "Parameters": [
+        {
+          "Name": "company",
+          "ParameterType": "global::aeon.AEOHSolution.ICompany",
+          "ParameterTypeFullName": "aeon.AEOHSolution.ICompany, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
       "Name": "NORNotFound",
       "Parameters": [
         {
@@ -688,6 +700,18 @@
       ],
       "ReturnType": "global::System.Boolean",
       "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "OpenNOR",
+      "Parameters": [
+        {
+          "Name": "company",
+          "ParameterType": "global::aeon.AEOHSolution.ICompany",
+          "ParameterTypeFullName": "aeon.AEOHSolution.ICompany, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     },
     {
       "Name": "SCreateNOR",
